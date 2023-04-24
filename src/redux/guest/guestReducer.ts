@@ -1,14 +1,17 @@
-import { GuestRegistrationFormProps } from '@/components/GuestRegistration/GuestRegistration.component'
+import {
+  arrivalDate,
+  departureDate
+} from '@/components/GuestRegistration/utils/arrivalAndDepartureDates'
 import { createSlice } from '@reduxjs/toolkit'
-import { RootState } from '../app/store'
+import { GuestRegistrationFormProps } from './guestInterfaces'
 
 const initialState: GuestRegistrationFormProps = {
   firstName: '',
   lastName: '',
   email: '',
   tel: '',
-  arrival: new Date(),
-  departure: new Date(),
+  arrival: arrivalDate,
+  departure: departureDate,
   accomodationComment: '',
   presents: false,
   ownsPc: false,
@@ -17,12 +20,9 @@ const initialState: GuestRegistrationFormProps = {
 }
 
 export const guestFormSlice = createSlice({
-  name: 'guestFormState',
+  name: 'guestForm',
   initialState,
   reducers: {}
 })
 
-export const {} = guestFormSlice.actions
 export default guestFormSlice.reducer
-
-export const guestFormLayout = (state: RootState) => state.guestForm
