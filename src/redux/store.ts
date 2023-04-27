@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import guestFormReducer from './guest/guestReducer'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import guestReducer from './guest/reducer'
 
 export const store = configureStore({
   reducer: {
-    guestForm: guestFormReducer
+    guest: guestReducer
   }
 })
 

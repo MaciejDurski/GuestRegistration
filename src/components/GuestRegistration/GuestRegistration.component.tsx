@@ -1,4 +1,4 @@
-import { GuestRegistrationFormProps } from '@/redux/guest/guestInterfaces'
+import { GuestRegistrationFormProps } from '@/redux/guest/interfaces'
 import { Box, Button, MenuItem } from '@mui/material'
 import { Stack } from '@mui/system'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'

@@ -1,4 +1,4 @@
-import { GuestRegistrationFormProps } from '@/redux/guest/guestInterfaces'
+import { GuestRegistrationFormProps } from '@/redux/guest/interfaces'
 import GuestRegistration from './GuestRegistration.component'
 
 const GuestRegistrationContainer = () => {
