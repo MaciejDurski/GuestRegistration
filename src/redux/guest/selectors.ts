@@ -1,3 +1,3 @@
 import { RootState } from '../store'
 
-export const selectGuestForm = (state: RootState) => state.guestForm
+export const selectGuest = (state: RootState) => state.guest
