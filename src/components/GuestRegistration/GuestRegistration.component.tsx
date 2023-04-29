@@ -41,7 +41,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
               <Stack width='40%' minWidth='320px'>
                 <Field
                   name='firstName'
-                  label={t('guestForm.firstName')}
+                  label={t('common.firstName')}
                   component={GMInput}
                   error={errors.firstName}
                   touched={touched.firstName}
@@ -49,7 +49,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
 
                 <Field
                   name='lastName'
-                  label={t('guestForm.lastName')}
+                  label={t('common.lastName')}
                   component={GMInput}
                   error={errors.lastName}
                   touched={touched.lastName}
@@ -58,7 +58,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                 <Field
                   name='email'
                   type='email'
-                  label={t('guestForm.email')}
+                  label={t('common.email')}
                   component={GMInput}
                   error={errors.email}
                   touched={touched.email}
@@ -133,7 +133,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                     <Field
                       component={Select}
                       name='speechLength'
-                      label={t('guestForm.speechLength')}
+                      label={t('guest.speechLength')}
                       formHelperText={{
                         children: t('guestForm.speechLengthHelperText')
                       }}

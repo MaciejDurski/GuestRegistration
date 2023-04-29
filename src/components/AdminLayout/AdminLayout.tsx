@@ -12,7 +12,6 @@ const a11yProps = (index: number) => ({
 
 const AdminLayout = (page: ReactElement) => {
   const { t } = useTranslation();
-
   const { asPath } = useRouter();
 
   return (

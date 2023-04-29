@@ -1,32 +1,23 @@
+import { IGuest } from "@/redux/guest/interfaces";
 import { GridRowsProp } from "@mui/x-data-grid";
 
-export const rows: GridRowsProp = [
+export const rows: GridRowsProp<IGuest> = [
   {
     id: 1,
-    name: "Kasia Durska",
+    firstName: "Kasia",
+    lastName:'Strząska',
     email: "kasia.durska@wp.pl",
-    phone: "12312313",
+    tel: "12312313",
     checkIn: false,
     type: "guest",
     organizer: 2,
-    accommodationNote: "",
+    accomodationComment: "",
     accommodation: "Jagienka",
-    ownComputer: false,
-    presentationLength: "1:20",
-    specialRequirements: "Szklanka wody",
-  },
-  {
-    id: 2,
-    name: "Michał Durski",
-    email: "michal.durski@gmail.com",
-    phone: "11316633",
-    checkIn: true,
-    type: "guest",
-    organizer: 2,
-    accommodationNote: "",
-    accommodation: "Jagienka",
-    ownComputer: false,
-    presentationLength: "1:20",
-    specialRequirements: "Szklanka wody",
+    ownsPc: false,
+    speechLength: "1:20",
+    specialNeeds: "Szklanka wody",
+    arrival:new Date(),
+    departure:new Date(),
+    presents:false,
   },
 ];

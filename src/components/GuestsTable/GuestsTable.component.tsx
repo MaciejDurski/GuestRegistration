@@ -6,27 +6,28 @@ const columns: GridColDef[] = [
   {
     field: "name",
     headerName: i18next.t<string>("common.nameAndSurrname"),
+    valueGetter:({row})=>`${row.firstName} ${row.lastName}`
   },
   { field: "email", headerName: i18next.t<string>("common.email") },
-  { field: "phone", headerName: i18next.t<string>("common.phone") },
+  { field: "tel", headerName: i18next.t<string>("common.tel") },
   { field: "checkIn", headerName: i18next.t<string>("guest.checkIn") },
   { field: "type", headerName: i18next.t<string>("common.type") },
   { field: "organizer", headerName: i18next.t<string>("common.guardian") },
   {
-    field: "accommodationNote",
+    field: "accomodationComment",
     headerName: i18next.t<string>("guest.accommodationNote"),
   },
   {
     field: "accommodation",
     headerName: i18next.t<string>("guest.accommodation"),
   },
-  { field: "ownComputer", headerName: i18next.t<string>("guest.ownComputer") },
+  { field: "ownsPc", headerName: i18next.t<string>("guest.ownComputer") },
   {
-    field: "presentationLength",
-    headerName: i18next.t<string>("guest.presentationLength"),
+    field: "speechLength",
+    headerName: i18next.t<string>("guest.speechLength"),
   },
   {
-    field: "specialRequirements",
+    field: "specialNeeds",
     headerName: i18next.t<string>("guest.specialRequirements"),
   },
 ];
