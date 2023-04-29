@@ -1,19 +1,28 @@
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+import { theme } from "@/styles/theme";
 import "@/translations/i18n";
-import { ReactElement, ReactNode } from "react";
-import { NextPage } from "next";
+import { ThemeProvider } from "@mui/material";
+import { LocalizationProvider, plPL } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+import "dayjs/locale/pl";
+import utc from "dayjs/plugin/utc";
+import type { AppProps } from "next/app";
+dayjs.extend(utc);
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
-};
-
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
-
-export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page);
-
-  return getLayout(<Component {...pageProps} />);
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider theme={theme}>
+      <LocalizationProvider
+        dateLibInstance={dayjs.utc}
+        dateAdapter={AdapterDayjs}
+        adapterLocale="pl"
+        localeText={
+          plPL.components.MuiLocalizationProvider.defaultProps.localeText
+        }
+      >
+        <Component {...pageProps} />
+      </LocalizationProvider>
+    </ThemeProvider>
+  );
 }

@@ -1,7 +1,12 @@
-import GuestRegistration from "./GuestRegistration.component";
+import { GuestRegistrationFormProps } from '@/redux/guest/interfaces'
+import GuestRegistration from './GuestRegistration.component'
 
 const GuestRegistrationContainer = () => {
-  return <GuestRegistration />;
-};
+  const onSubmit = (values: GuestRegistrationFormProps) => {
+    console.log(values)
+  }
 
-export default GuestRegistrationContainer;
+  return <GuestRegistration onSubmit={onSubmit} />
+}
+
+export default GuestRegistrationContainer
