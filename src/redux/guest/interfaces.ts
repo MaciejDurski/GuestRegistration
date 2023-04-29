@@ -17,4 +17,4 @@ export interface IGuest{
   specialNeeds?: string
 }
 
-export interface GuestRegistrationFormProps extends Omit<IGuest,'id'|'checkIn'|'type'|'organizer'|'accommodation'>{}
+export type GuestRegistrationFormProps = Omit<IGuest,'id'|'checkIn'|'type'|'organizer'|'accommodation'>
