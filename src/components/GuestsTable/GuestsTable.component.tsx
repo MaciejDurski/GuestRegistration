@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { rows } from "./mock";
 import i18next from "i18next";
