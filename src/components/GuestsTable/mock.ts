@@ -1,4 +1,4 @@
-import { IGuest } from "@/redux/guest/interfaces";
+import { IGuest, SpeechLength } from "@/redux/guest/interfaces";
 import { GridRowsProp } from "@mui/x-data-grid";
 
 export const rows: GridRowsProp<IGuest> = [
@@ -14,7 +14,7 @@ export const rows: GridRowsProp<IGuest> = [
     accomodationComment: "",
     accommodation: "Jagienka",
     ownsPc: false,
-    speechLength: "1:20",
+    speechLength: SpeechLength.min15_30,
     specialNeeds: "Szklanka wody",
     arrival:new Date(),
     departure:new Date(),
