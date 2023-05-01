@@ -1,4 +1,4 @@
-import { GuestRegistrationFormProps } from '@/redux/guest/interfaces'
+import { GuestRegistrationFormProps, SpeechLength } from '@/redux/guest/interfaces'
 import { Box, Button, MenuItem } from '@mui/material'
 import { Stack } from '@mui/system'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
@@ -29,7 +29,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
           accomodationComment: '',
           presents: false,
           ownsPc: false,
-          speechLength: '0-15',
+          speechLength: SpeechLength.min0_15,
           specialNeeds: ''
         }}
         validationSchema={guestRegistrationSchema}
@@ -67,7 +67,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                 <Field
                   name='tel'
                   type='tel'
-                  label={t('guestForm.tel')}
+                  label={t('common.tel')}
                   component={GMInput}
                   error={errors.tel}
                   touched={touched.tel}
