@@ -10,6 +10,7 @@ import { Field, Form, Formik } from 'formik';
 import { CheckboxWithLabel, Select } from 'formik-mui';
 import { t } from 'i18next';
 import GMInput from '../common/GMInput';
+import { InputError } from '../common/InputError';
 import { arrivalDate, departureDate } from './utils/arrivalAndDepartureDates';
 import { guestRegistrationSchema } from './utils/guestRegistrationSchema';
 import { speechLengthOptions } from './utils/speechLengthOptions';
@@ -27,8 +28,8 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
           lastName: '',
           email: '',
           tel: '',
-          arrival: arrivalDate,
-          departure: departureDate,
+          arrival: undefined,
+          departure: undefined,
           accomodationComment: '',
           presents: false,
           ownsPc: false,
@@ -89,7 +90,19 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                       minDate={dayjs.utc(arrivalDate)}
                       maxDate={dayjs.utc(departureDate)}
                       views={['day']}
+                      disablePast
+                      slotProps={{
+                        textField: {
+                          error: errors.arrival && touched.arrival,
+                        },
+                      }}
                     />
+
+                    <Box pt={1}>
+                      {errors.arrival && touched.arrival && (
+                        <InputError error={errors.arrival} />
+                      )}
+                    </Box>
                   </Box>
                   <Box pt={{ xs: 3, lg: 0 }} pl={{ lg: 3 }}>
                     <Field
@@ -99,10 +112,20 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                       onChange={(value: Date) => {
                         setFieldValue('departure', value);
                       }}
-                      minDate={dayjs.utc(arrivalDate)}
+                      minDate={values.arrival}
                       maxDate={dayjs.utc(departureDate)}
                       views={['day']}
+                      slotProps={{
+                        textField: {
+                          error: errors.departure && touched.departure,
+                        },
+                      }}
                     />
+                    <Box pt={1}>
+                      {errors.departure && touched.departure && (
+                        <InputError error={errors.departure} />
+                      )}
+                    </Box>
                   </Box>
                 </Stack>
 

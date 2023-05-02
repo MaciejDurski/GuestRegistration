@@ -14,12 +14,11 @@ export const guestRegistrationSchema = Yup.object({
     .email(`${t('guestFormValidation.emailInvalid')}`)
     .required(`${t('guestFormValidation.emailRequired')}`),
   tel: Yup.string().required(`${t('guestFormValidation.telRequired')}`),
-  arrival: Yup.date()
-    .required(`${t('guestFormValidation.arrivalRequired')}`)
-    .nullable(),
+  arrival: Yup.date().required(`${t('guestFormValidation.arrivalRequired')}`),
+
   departure: Yup.date()
     .required(`${t('guestFormValidation.departureRequired')}`)
-    .nullable(),
+    .min(new Date('2023-05-15T00:00:00.000Z'), `ERROR`),
   accomodationComment: Yup.string().max(
     500,
     `${t('guestFormValidation.commentTooLong')}`
