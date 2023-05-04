@@ -93,11 +93,10 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                       disablePast
                       slotProps={{
                         textField: {
-                          error: errors.arrival && touched.arrival,
+                          error: !!errors.arrival && !!touched.arrival,
                         },
                       }}
                     />
-
                     <Box pt={1}>
                       {errors.arrival && touched.arrival && (
                         <InputError error={errors.arrival} />
@@ -117,7 +116,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                       views={['day']}
                       slotProps={{
                         textField: {
-                          error: errors.departure && touched.departure,
+                          error: !!errors.departure && !!touched.departure,
                         },
                       }}
                     />
