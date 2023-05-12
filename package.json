@@ -21,6 +21,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "dayjs": "^1.11.7",
     "eslint-config-next": "13.2.4",
+    "firebase": "^9.21.0",
     "formik": "^2.2.9",
     "formik-mui": "^5.0.0-alpha.0",
     "formik-mui-lab": "^1.0.0",
