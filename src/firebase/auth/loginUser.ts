@@ -6,11 +6,5 @@ import { auth } from '../config';
 export const loginUser = async (values: ILogin) => {
   const { userEmail, password } = values;
 
-  const userCredential = await signInWithEmailAndPassword(
-    auth,
-    userEmail,
-    password
-  );
-
-  console.log(userCredential.user);
+  await signInWithEmailAndPassword(auth, userEmail, password);
 };

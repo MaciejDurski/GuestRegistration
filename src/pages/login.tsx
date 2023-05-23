@@ -37,7 +37,6 @@ const Login = () => {
           {({ touched, errors }) => (
             <Form>
               <Stack p={4} minWidth="320px" spacing={2} alignItems="center">
-                <div>test@test.com</div>
                 <Field
                   name="userEmail"
                   label={t('common.email')}
@@ -45,7 +44,7 @@ const Login = () => {
                   error={errors.userEmail}
                   touched={touched.userEmail}
                 />
-                <div>test123</div>
+
                 <Field
                   name="password"
                   label={t('common.password')}
