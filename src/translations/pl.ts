@@ -10,6 +10,7 @@ export const translationsPL = {
     firstName: 'Imię',
     lastName: 'Nazwisko',
     tel: 'Telefon',
+    password: 'Hasło',
   },
   guest: {
     checkIn: 'Odprawa',
@@ -18,6 +19,10 @@ export const translationsPL = {
     ownComputer: 'Własny komputer',
     speechLength: 'Długość prezentacji (minuty)',
     specialRequirements: 'Specjalne wymagania',
+  },
+  formValidation: {
+    emailInvalid: 'Niepoprawny email',
+    emailRequired: 'Podaj Email',
   },
   guestForm: {
     arrivalDate: 'Data Przyjazdu',
@@ -35,10 +40,6 @@ export const translationsPL = {
     specialNeeds: 'Twoje dodatkowe potrzeby',
     submit: 'Wyślij',
   },
-  formValidation: {
-    emailInvalid: 'Niepoprawny email',
-    emailRequired: 'Podaj Email',
-  },
   guestFormValidation: {
     firstNameTooShort: 'Imię musi się składać z ponad 2 liter',
     firstNameTooLong: 'Imię musi się składać z mniej niż 50 liter',
@@ -51,7 +52,10 @@ export const translationsPL = {
     departureRequired: 'Podaj datę wyjazdu',
     commentTooLong: 'Komentarz musi się składać z mniej niż 500 liter',
   },
-  userFormValidation: {
+  loginUser: {
+    login: 'Zaloguj',
+  },
+  loginUserFormValidation: {
     passwordRequired: 'Podaj hasło',
   },
 };

@@ -1,44 +1,51 @@
 import { userLoginSchema } from '@/components/GuestRegistration/utils/validationSchemas/loginUserSchema';
 import GMInput from '@/components/common/GMInput';
-import { Box, Button } from '@mui/material';
+import { loginUser } from '@/firebase/auth/login';
+import { Button } from '@mui/material';
 import { Stack } from '@mui/system';
 import { Field, Form, Formik } from 'formik';
 import { t } from 'i18next';
+
+export interface ILogin {
+  userEmail: string;
+  password: string;
+}
 
 const login = () => {
   return (
     <>
       <Formik
         initialValues={{
-          firstName: '',
-          lastName: '',
+          userEmail: '',
+          password: '',
         }}
         validationSchema={userLoginSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => loginUser(values)}
       >
-        {({ touched, errors }) => (
+        {({ values, touched, errors }) => (
           <Form>
-            <Stack p={4} width="40%" minWidth="320px">
+            <Stack p={4} minWidth="320px" spacing={2} alignItems="center">
+              <div>test@test.com</div>
               <Field
-                name="firstName"
-                label={t('common.firstName')}
+                name="userEmail"
+                label={t('common.email')}
                 component={GMInput}
-                error={errors.firstName}
-                touched={touched.firstName}
+                error={errors.userEmail}
+                touched={touched.userEmail}
+              />
+              <div>test123</div>
+              <Field
+                name="password"
+                label={t('common.password')}
+                component={GMInput}
+                error={errors.password}
+                touched={touched.password}
               />
 
-              <Field
-                name="lastName"
-                label={t('common.lastName')}
-                component={GMInput}
-                error={errors.lastName}
-                touched={touched.lastName}
-              />
-              <Box mt={2}>
-                <Button variant="outlined" type="submit">
-                  {t('guestForm.submit')}
-                </Button>
-              </Box>
+              <Button sx={{ maxWidth: '50%' }} variant="outlined" type="submit">
+                {t('loginUser.login')}
+              </Button>
+              <div>{JSON.stringify(values)}</div>
             </Stack>
           </Form>
         )}
