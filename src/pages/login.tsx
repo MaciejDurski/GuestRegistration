@@ -58,7 +58,7 @@ const Login = () => {
                   variant="outlined"
                   type="submit"
                 >
-                  {t('loginUser.login')}
+                  {t('common.login')}
                 </Button>
               </Stack>
             </Form>

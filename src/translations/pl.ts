@@ -11,6 +11,8 @@ export const translationsPL = {
     lastName: 'Nazwisko',
     tel: 'Telefon',
     password: 'Hasło',
+    login: 'Zaloguj',
+    logout: 'Wyloguj',
   },
   guest: {
     checkIn: 'Odprawa',
@@ -51,9 +53,6 @@ export const translationsPL = {
     arrivalRequired: 'Podaj datę przyjazdu',
     departureRequired: 'Podaj datę wyjazdu',
     commentTooLong: 'Komentarz musi się składać z mniej niż 500 liter',
-  },
-  loginUser: {
-    login: 'Zaloguj',
   },
   loginUserFormValidation: {
     passwordRequired: 'Podaj hasło',

@@ -2,6 +2,7 @@ import { logoutUser } from '@/firebase/auth/logoutUser';
 import { auth } from '@/firebase/config';
 import { Button } from '@mui/material';
 import { Stack } from '@mui/system';
+import { t } from 'i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -18,17 +19,19 @@ export const Navbar = () => {
 
   return (
     <Stack direction="row" p={4} spacing={4} alignItems="center">
-      <Link href="/">Home</Link>
-      <Link href="/admin">Admin Panel</Link>
+      <Link href="/">GuestRegistration / Home</Link>
       {user ? (
         <>
           <Button variant="outlined" onClick={logout}>
-            Logout
+            {t('common.logout')}
           </Button>
+          <Link href="/admin">Guests Table</Link>
           <div>hello {user.email}</div>
         </>
       ) : (
-        <Link href="/login">Login</Link>
+        <Button variant="outlined">
+          <Link href="/login">{t('common.login')}</Link>
+        </Button>
       )}
     </Stack>
   );
