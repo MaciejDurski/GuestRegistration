@@ -4025,6 +4025,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-firebase-hooks@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "react-firebase-hooks@npm:5.1.1"
+  peerDependencies:
+    firebase: ">= 9.0.0"
+    react: ">= 16.8.0"
+  checksum: f7dbc42202082e35a4bbd60e6b729cf7a1a14ca300850f35dbcbda3fe3ecef0c1f8157c5dec711edfd3d6e021f2626e768241296598896731a56ce768bab829b
+  languageName: node
+  linkType: hard
+
 "react-i18next@npm:^12.2.0":
   version: 12.2.2
   resolution: "react-i18next@npm:12.2.2"
@@ -4723,6 +4733,7 @@ __metadata:
     prettier: ^2.8.8
     react: 18.2.0
     react-dom: 18.2.0
+    react-firebase-hooks: ^5.1.1
     react-i18next: ^12.2.0
     react-redux: ^8.0.5
     tiny-warning: ^1.0.3
