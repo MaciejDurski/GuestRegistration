@@ -2,8 +2,7 @@ import { userLoginSchema } from '@/components/GuestRegistration/utils/validation
 import GMInput from '@/components/common/GMInput';
 import { loginUser } from '@/firebase/auth/loginUser';
 import { auth } from '@/firebase/config';
-import { Button } from '@mui/material';
-import { Stack } from '@mui/system';
+import { Box, Button, Stack } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
 import { t } from 'i18next';
 import { useRouter } from 'next/router';
@@ -15,15 +14,15 @@ export interface ILogin {
 }
 
 const Login = () => {
+  const [user, loading] = useAuthState(auth);
   const router = useRouter();
-  const [user] = useAuthState(auth);
 
-  const handleLogin = (values: ILogin) => {
-    loginUser(values);
-    router.push('/admin');
+  const handleLogin = async (values: ILogin) => {
+    await loginUser(values);
+    router.replace('/admin');
   };
 
-  if (!user) {
+  if (!user && !loading) {
     return (
       <>
         <Formik
@@ -32,7 +31,7 @@ const Login = () => {
             password: '',
           }}
           validationSchema={userLoginSchema}
-          onSubmit={(values) => handleLogin(values)}
+          onSubmit={handleLogin}
         >
           {({ touched, errors }) => (
             <Form>
@@ -67,7 +66,7 @@ const Login = () => {
       </>
     );
   } else {
-    router.push('/');
+    return <Box></Box>;
   }
 };
 
