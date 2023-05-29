@@ -24,7 +24,7 @@ export const Navbar = () => {
           <Button variant="outlined" onClick={logout}>
             {t('common.logout')}
           </Button>
-          <Link href="/admin">Guests Table</Link>
+          <Link href="/admin">Admin Panel</Link>
           <Box>hello {user.email}</Box>
         </>
       )}
