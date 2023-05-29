@@ -16,8 +16,8 @@ export interface IGuest {
   organizer?: number;
   email: string;
   tel: string;
-  arrival: Date | undefined;
-  departure: Date | undefined;
+  arrival: Date;
+  departure: Date;
   accommodation?: string;
   accomodationComment?: string;
   presents: boolean;

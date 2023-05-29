@@ -16,7 +16,7 @@ import { guestRegistrationSchema } from './utils/guestRegistrationSchema';
 import { speechLengthOptions } from './utils/speechLengthOptions';
 
 interface IProps {
-  onSubmit: (values: GuestRegistrationFormProps) => void;
+  onSubmit: (values: Partial<GuestRegistrationFormProps>) => void;
 }
 
 const GuestRegistration = ({ onSubmit }: IProps) => {
