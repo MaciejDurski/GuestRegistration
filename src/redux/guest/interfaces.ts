@@ -26,15 +26,6 @@ export interface IGuest {
   specialNeeds?: string;
 }
 
-export interface IUser {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  tel: string;
-  type: string;
-}
-
 export type GuestRegistrationFormProps = Omit<
   IGuest,
   'id' | 'checkIn' | 'type' | 'organizer' | 'accommodation'

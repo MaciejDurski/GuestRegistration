@@ -1,4 +1,4 @@
-import { IUser } from '@/redux/guest/interfaces';
+import { IUser } from '@/redux/user/interfaces';
 import { GridRowsProp } from '@mui/x-data-grid';
 
 export const rows: GridRowsProp<IUser> = [
