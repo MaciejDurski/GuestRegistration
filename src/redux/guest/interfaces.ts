@@ -5,10 +5,11 @@ export enum SpeechLength {
   min45_60 = '45-60',
   min60_75 = '60-75',
   min75_90 = '75-90',
+  none = '',
 }
 
 export interface IGuest {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   checkIn?: boolean;
@@ -26,7 +27,20 @@ export interface IGuest {
   specialNeeds?: string;
 }
 
-export type GuestRegistrationFormProps = Omit<
-  IGuest,
-  'id' | 'checkIn' | 'type' | 'organizer' | 'accommodation'
->;
+// export type GuestRegistrationFormProps = Omit<
+//   IGuest,
+//   'id' | 'checkIn' | 'type' | 'organizer' | 'accommodation'
+// >;
+export interface GuestRegistrationFormProps {
+  firstName: string;
+  lastName: string;
+  email: string;
+  tel: string;
+  arrival: { $d: Date } | undefined;
+  departure: { $d: Date } | undefined;
+  accomodationComment?: string;
+  presents: boolean;
+  ownsPc?: boolean;
+  speechLength?: SpeechLength;
+  specialNeeds?: string;
+}

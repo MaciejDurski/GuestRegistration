@@ -3,7 +3,7 @@ import GuestRegistration from './GuestRegistration.component';
 import { addGuest } from '@/firebase/database/guest/addGuest';
 
 const GuestRegistrationContainer = () => {
-  const onSubmit = (values: Partial<GuestRegistrationFormProps>) => {
+  const onSubmit = (values: GuestRegistrationFormProps) => {
     addGuest(values);
   };
 

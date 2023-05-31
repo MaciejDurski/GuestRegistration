@@ -16,7 +16,7 @@ import { guestRegistrationSchema } from './utils/validationSchemas/guestRegistra
 import { speechLengthOptions } from './utils/speechLengthOptions';
 
 interface IProps {
-  onSubmit: (values: Partial<GuestRegistrationFormProps>) => void;
+  onSubmit: (values: GuestRegistrationFormProps) => void;
 }
 
 const GuestRegistration = ({ onSubmit }: IProps) => {
@@ -83,9 +83,10 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                     component={DatePicker}
                     label={t('guestForm.arrivalDate')}
                     name="arrival"
-                    onChange={(value: Date) => {
+                    onChange={(value: { $d: Date }) => {
                       setFieldValue('arrival', value);
                     }}
+                    defaultValue={dayjs.utc(arrivalDate)}
                     minDate={dayjs.utc(arrivalDate)}
                     maxDate={dayjs.utc(departureDate)}
                     views={['day']}
@@ -107,9 +108,10 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                     component={DatePicker}
                     label={t('guestForm.departureDate')}
                     name="departure"
-                    onChange={(value: Date) => {
+                    onChange={(value: { $d: Date }) => {
                       setFieldValue('departure', value);
                     }}
+                    defaultValue={dayjs.utc(departureDate)}
                     minDate={values.arrival}
                     maxDate={dayjs.utc(departureDate)}
                     views={['day']}
