@@ -1,8 +1,6 @@
-import { getGuests } from '@/firebase/database/guest/getGuests';
 import { IGuest } from '@/redux/guest/interfaces';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import i18next from 'i18next';
-import { useEffect, useState } from 'react';
 
 const columns: GridColDef[] = [
   {
@@ -28,6 +26,7 @@ const columns: GridColDef[] = [
     field: 'accommodation',
     headerName: i18next.t<string>('guest.accommodation'),
   },
+  { field: 'presents', headerName: i18next.t<string>('guest.presents') },
   { field: 'ownsPc', headerName: i18next.t<string>('guest.ownComputer') },
   {
     field: 'speechLength',
@@ -39,20 +38,11 @@ const columns: GridColDef[] = [
   },
 ];
 
-const GuestsTable = () => {
-  const [guests, setGuests] = useState<IGuest[]>([]);
+interface IProps {
+  guests: IGuest[] | [];
+}
 
-  useEffect(() => {
-    const guestGetter = async () => {
-      const data = await getGuests();
-      if (data) {
-        setGuests(data);
-      }
-    };
-
-    guestGetter();
-  }, []);
-
+const GuestsTable = ({ guests }: IProps) => {
   return (
     <>
       <DataGrid rows={guests} columns={columns} autoHeight />

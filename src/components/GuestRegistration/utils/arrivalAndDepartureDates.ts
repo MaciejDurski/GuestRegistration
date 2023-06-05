@@ -1,13 +1,18 @@
-const currentDate = new Date();
-const currentYear = currentDate.getUTCFullYear();
+import dayjs from 'dayjs';
 
-export const arrivalDate = new Date(`${currentYear}-09-06T00:00:00.000Z`);
-export const departureDate = new Date(`${currentYear}-09-11T00:00:00.000Z`);
+const currentYear = new Date().getFullYear();
+
+export const arrivalDate = dayjs.utc(
+  new Date(`${currentYear}-09-06T00:00:00.000Z`)
+);
+export const departureDate = dayjs.utc(
+  new Date(`${currentYear}-09-11T00:00:00.000Z`)
+);
 
 export const formatDate = (date: Date) => {
-  const year = date.getUTCFullYear();
-  const month = date.getUTCMonth();
-  const day = date.getUTCDate();
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
 
   const addZero = (num: number) => `${num}`.padStart(2, '0');
 
