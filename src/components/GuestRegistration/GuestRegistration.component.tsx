@@ -11,6 +11,7 @@ import GMDatePicker from '../common/GMDatePicker';
 import GMInput from '../common/GMInput';
 import { speechLengthOptions } from './utils/speechLengthOptions';
 import { guestRegistrationSchema } from './utils/validationSchemas/guestRegistrationSchema';
+import { arrivalDate, departureDate } from './utils/arrivalAndDepartureDates';
 
 interface IProps {
   onSubmit: (values: GuestRegistrationFormProps) => void;
@@ -25,8 +26,8 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
           lastName: '',
           email: '',
           tel: '',
-          arrival: undefined,
-          departure: undefined,
+          arrival: arrivalDate,
+          departure: departureDate,
           accomodationComment: '',
           presents: false,
           ownsPc: false,
@@ -83,8 +84,10 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                     error={errors.arrival}
                     touched={touched.arrival}
                     disablePast={true}
-                    departure={false}
-                    arrival={values.arrival}
+                    defaultValue={arrivalDate}
+                    minDate={arrivalDate}
+                    maxDate={departureDate}
+                    value={values.arrival}
                   />
                 </Box>
                 <Box pt={{ xs: 3, lg: 0 }} pl={{ lg: 3 }}>
@@ -94,8 +97,10 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                     setFieldValue={setFieldValue}
                     error={errors.departure}
                     touched={touched.departure}
-                    departure={true}
-                    arrival={values.arrival}
+                    defaultValue={departureDate}
+                    minDate={arrivalDate}
+                    maxDate={departureDate}
+                    value={values.departure}
                   />
                 </Box>
               </Stack>

@@ -17,8 +17,8 @@ export interface IGuest {
   organizer?: number;
   email: string;
   tel: string;
-  arrival: Date;
-  departure: Date;
+  arrival: string;
+  departure: string;
   accommodation?: string;
   accomodationComment?: string;
   presents: boolean;
@@ -30,14 +30,5 @@ export interface IGuest {
 export interface GuestRegistrationFormProps
   extends Omit<
     IGuest,
-    | 'id'
-    | 'checkIn'
-    | 'type'
-    | 'organizer'
-    | 'accommodation'
-    | 'arrival'
-    | 'departure'
-  > {
-  arrival: { $d: Date } | undefined;
-  departure: { $d: Date } | undefined;
-}
+    'id' | 'checkIn' | 'type' | 'organizer' | 'accommodation'
+  > {}
