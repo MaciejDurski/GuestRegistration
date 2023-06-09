@@ -75,7 +75,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                 {/* DateRangePicker is included on Pro package, thus we're using DatePickers */}
                 <Box>
                   <GMDatePicker
-                    label="arrivalDate"
+                    label={t(`guestForm.arrivalDate`)}
                     name="arrival"
                     setFieldValue={setFieldValue}
                     error={errors.arrival}
@@ -88,7 +88,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                 </Box>
                 <Box pt={{ xs: 3, lg: 0 }} pl={{ lg: 3 }}>
                   <GMDatePicker
-                    label="departureDate"
+                    label={t(`guestForm.departureDate`)}
                     name="departure"
                     setFieldValue={setFieldValue}
                     error={errors.departure}

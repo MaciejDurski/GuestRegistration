@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { Field } from 'formik';
-import { t } from 'i18next';
 import { InputError } from './InputError';
 
 interface IProps {
@@ -36,7 +35,7 @@ const GMDatePicker = ({
     <>
       <Field
         component={DatePicker}
-        label={t(`guestForm.${label}`)}
+        label={label}
         name={name}
         onChange={(value: dayjs.Dayjs) => {
           setFieldValue(name, value.toISOString());
