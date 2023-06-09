@@ -28,7 +28,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
           accomodationComment: '',
           presents: false,
           ownsPc: false,
-          speechLength: '',
+          speechLength: null,
           specialNeeds: '',
         }}
         validationSchema={guestRegistrationSchema}
@@ -115,7 +115,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                 type="checkbox"
                 onClick={() => {
                   values.ownsPc = false;
-                  values.speechLength = '';
+                  values.speechLength = null;
                   values.specialNeeds = '';
                 }}
                 name="presents"
@@ -136,6 +136,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                     component={Select}
                     name="speechLength"
                     label={t('guest.speechLength')}
+                    value={values.speechLength || ''}
                     formHelperText={{
                       children: t('guestForm.speechLengthHelperText'),
                     }}

@@ -22,7 +22,7 @@ export interface IGuest {
   accomodationComment?: string;
   presents: boolean;
   ownsPc?: boolean;
-  speechLength?: SpeechLength | string;
+  speechLength: SpeechLength | null;
   specialNeeds?: string;
 }
 
