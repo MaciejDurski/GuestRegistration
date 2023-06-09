@@ -1,7 +1,4 @@
-import {
-  GuestRegistrationFormProps,
-  SpeechLength,
-} from '@/redux/guest/interfaces';
+import { GuestRegistrationFormProps } from '@/redux/guest/interfaces';
 import { Box, Button, MenuItem } from '@mui/material';
 import { Stack } from '@mui/system';
 import { Field, Form, Formik } from 'formik';
@@ -9,9 +6,9 @@ import { CheckboxWithLabel, Select } from 'formik-mui';
 import { t } from 'i18next';
 import GMDatePicker from '../common/GMDatePicker';
 import GMInput from '../common/GMInput';
+import { arrivalDate, departureDate } from './utils/arrivalAndDepartureDates';
 import { speechLengthOptions } from './utils/speechLengthOptions';
 import { guestRegistrationSchema } from './utils/validationSchemas/guestRegistrationSchema';
-import { arrivalDate, departureDate } from './utils/arrivalAndDepartureDates';
 
 interface IProps {
   onSubmit: (values: GuestRegistrationFormProps) => void;
@@ -31,7 +28,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
           accomodationComment: '',
           presents: false,
           ownsPc: false,
-          speechLength: SpeechLength.undefined,
+          speechLength: '',
           specialNeeds: '',
         }}
         validationSchema={guestRegistrationSchema}
@@ -118,7 +115,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                 type="checkbox"
                 onClick={() => {
                   values.ownsPc = false;
-                  values.speechLength = SpeechLength.undefined;
+                  values.speechLength = '';
                   values.specialNeeds = '';
                 }}
                 name="presents"

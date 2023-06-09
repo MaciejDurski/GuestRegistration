@@ -5,7 +5,6 @@ export enum SpeechLength {
   min45_60 = '45-60',
   min60_75 = '60-75',
   min75_90 = '75-90',
-  undefined = '',
 }
 
 export interface IGuest {
@@ -23,7 +22,7 @@ export interface IGuest {
   accomodationComment?: string;
   presents: boolean;
   ownsPc?: boolean;
-  speechLength?: SpeechLength;
+  speechLength?: SpeechLength | string;
   specialNeeds?: string;
 }
 
