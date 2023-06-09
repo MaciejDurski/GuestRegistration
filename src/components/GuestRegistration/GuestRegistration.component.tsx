@@ -11,6 +11,7 @@ import GMDatePicker from '../common/GMDatePicker';
 import GMInput from '../common/GMInput';
 import { speechLengthOptions } from './utils/speechLengthOptions';
 import { guestRegistrationSchema } from './utils/validationSchemas/guestRegistrationSchema';
+import { arrivalDate, departureDate } from './utils/arrivalAndDepartureDates';
 
 interface IProps {
   onSubmit: (values: GuestRegistrationFormProps) => void;
@@ -25,12 +26,12 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
           lastName: '',
           email: '',
           tel: '',
-          arrival: undefined,
-          departure: undefined,
+          arrival: arrivalDate,
+          departure: departureDate,
           accomodationComment: '',
           presents: false,
           ownsPc: false,
-          speechLength: SpeechLength.null,
+          speechLength: SpeechLength.undefined,
           specialNeeds: '',
         }}
         validationSchema={guestRegistrationSchema}
@@ -83,8 +84,9 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                     error={errors.arrival}
                     touched={touched.arrival}
                     disablePast={true}
-                    departure={false}
-                    arrival={values.arrival}
+                    minDate={arrivalDate}
+                    maxDate={departureDate}
+                    value={values.arrival}
                   />
                 </Box>
                 <Box pt={{ xs: 3, lg: 0 }} pl={{ lg: 3 }}>
@@ -94,8 +96,9 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                     setFieldValue={setFieldValue}
                     error={errors.departure}
                     touched={touched.departure}
-                    departure={true}
-                    arrival={values.arrival}
+                    minDate={arrivalDate}
+                    maxDate={departureDate}
+                    value={values.departure}
                   />
                 </Box>
               </Stack>
@@ -115,7 +118,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                 type="checkbox"
                 onClick={() => {
                   values.ownsPc = false;
-                  values.speechLength = SpeechLength.null;
+                  values.speechLength = SpeechLength.undefined;
                   values.specialNeeds = '';
                 }}
                 name="presents"

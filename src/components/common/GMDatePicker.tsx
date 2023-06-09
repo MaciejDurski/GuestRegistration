@@ -1,11 +1,8 @@
 import { Box } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 import { Field } from 'formik';
 import { t } from 'i18next';
-import {
-  arrivalDate,
-  departureDate,
-} from '../GuestRegistration/utils/arrivalAndDepartureDates';
 import { InputError } from './InputError';
 
 interface IProps {
@@ -13,14 +10,15 @@ interface IProps {
   name: string;
   setFieldValue: (
     field: string,
-    value: { $d: Date },
+    value: string,
     shouldValidate?: boolean | undefined
   ) => void;
   error: string | undefined;
   touched: boolean | undefined;
   disablePast?: boolean;
-  departure: boolean;
-  arrival: { $d: Date } | undefined;
+  value?: string;
+  minDate?: string;
+  maxDate?: string;
 }
 
 const GMDatePicker = ({
@@ -30,8 +28,9 @@ const GMDatePicker = ({
   error,
   touched,
   disablePast = false,
-  departure,
-  arrival,
+  value,
+  minDate,
+  maxDate,
 }: IProps) => {
   return (
     <>
@@ -39,12 +38,12 @@ const GMDatePicker = ({
         component={DatePicker}
         label={t(`guestForm.${label}`)}
         name={name}
-        onChange={(value: { $d: Date }) => {
-          setFieldValue(name, value);
+        onChange={(value: dayjs.Dayjs) => {
+          setFieldValue(name, value.toISOString());
         }}
-        defaultValue={!departure ? arrivalDate : departureDate}
-        minDate={!departure ? arrivalDate : arrival}
-        maxDate={departureDate}
+        value={dayjs.utc(value)}
+        minDate={dayjs.utc(minDate)}
+        maxDate={dayjs.utc(maxDate)}
         views={['day']}
         disablePast={disablePast}
         slotProps={{

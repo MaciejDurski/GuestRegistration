@@ -1,4 +1,3 @@
-// import { IGuest } from '@/redux/guest/interfaces';
 import { FirebaseApp, getApp, getApps, initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 

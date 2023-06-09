@@ -15,6 +15,7 @@ export const getGuests = async () => {
       }));
       return arrayData;
     }
+    return [];
   } catch (error) {
     console.error(error);
     return [];
