@@ -10,4 +10,12 @@ export const rows: GridRowsProp<IUser> = [
     tel: '123-123-123',
     type: 'super organizer',
   },
+  {
+    id: 2,
+    firstName: 'Basia',
+    lastName: 'Brząska',
+    email: 'kasia.durska@wp.pl',
+    tel: '123-123-123',
+    type: 'super organizer',
+  },
 ];

@@ -17,6 +17,7 @@ export const translationsPL = {
     hello: 'Cześć',
     guestRegistration: 'Rejestracja Gościa',
     adminPanel: 'Panel Admina',
+    assign: 'Przypisz',
   },
   guest: {
     checkIn: 'Odprawa',
