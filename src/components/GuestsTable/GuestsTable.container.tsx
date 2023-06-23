@@ -1,21 +1,17 @@
-import { getGuests } from '@/firebase/database/guest/getGuests';
-import { IGuest } from '@/redux/guest/interfaces';
-import { useEffect, useState } from 'react';
+import { fetchGuests } from '@/redux/guests/actions';
+import { selectGuests } from '@/redux/guests/selectors';
+import { useAppDispatch, useAppSelector } from '@/redux/store';
+import { useEffect } from 'react';
 import GuestsTable from './GuestsTable.component';
 
 const GuestsTableContainer = () => {
-  const [guests, setGuests] = useState<IGuest[]>([]);
+  const guests = useAppSelector(selectGuests);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const guestGetter = async () => {
-      const data = await getGuests();
-      if (data) {
-        setGuests(data);
-      }
-    };
-
-    guestGetter();
-  }, []);
+    dispatch(fetchGuests());
+  }, [dispatch]);
 
   return <GuestsTable guests={guests} />;
 };

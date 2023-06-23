@@ -28,11 +28,5 @@ export interface IGuest {
 
 export type GuestRegistrationFormProps = Omit<
   IGuest,
-  | 'id'
-  | 'checkIn'
-  | 'type'
-  | 'organizer'
-  | 'accommodation'
-  | 'arrival'
-  | 'departure'
+  'id' | 'checkIn' | 'type' | 'organizer' | 'accommodation'
 >;

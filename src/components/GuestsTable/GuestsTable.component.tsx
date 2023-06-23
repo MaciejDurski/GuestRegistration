@@ -1,12 +1,7 @@
-import { IGuest } from '@/redux/guest/interfaces';
+import { IGuest } from '@/redux/guests/interfaces';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import dayjs from 'dayjs';
 import i18next from 'i18next';
-import { rows } from '../UsersTable/mock';
-
-const users = rows.map((row) => {
-  return `${row.firstName} ${row.lastName}`;
-});
 
 const columns: GridColDef[] = [
   {
@@ -52,7 +47,10 @@ const columns: GridColDef[] = [
     valueGetter: ({ row }) =>
       !row.organizer ? i18next.t<string>('common.assign') : row.organizer,
     type: 'singleSelect',
-    valueOptions: [i18next.t<string>('common.assign'), ...users],
+    valueOptions: [
+      i18next.t<string>('common.assign'),
+      //  ...users
+    ],
     editable: true,
   },
   {
