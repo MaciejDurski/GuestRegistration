@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchGuests } from './actions';
+import { fetchGuests, updateGuest } from './actions';
 import { IGuest } from './interfaces';
 import { Status } from '../enums/status';
 
@@ -30,6 +30,26 @@ export const guestsSlice = createSlice({
         state.guests = payload;
       })
       .addCase(fetchGuests.rejected, (state, action) => {
+        state.status = Status.FAILED;
+        state.error = action.error.message;
+      });
+    builder
+      .addCase(updateGuest.pending, (state) => {
+        state.status = Status.LOADING;
+        state.error = undefined;
+      })
+      .addCase(updateGuest.fulfilled, (state, { payload }) => {
+        state.status = Status.SUCCEEDED;
+        if (payload) {
+          state.guests = state.guests.map((guest) => {
+            if (guest.id === payload.id) {
+              guest = payload;
+            }
+            return guest;
+          });
+        }
+      })
+      .addCase(updateGuest.rejected, (state, action) => {
         state.status = Status.FAILED;
         state.error = action.error.message;
       });

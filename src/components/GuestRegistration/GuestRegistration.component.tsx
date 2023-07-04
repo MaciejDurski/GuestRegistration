@@ -1,4 +1,7 @@
-import { GuestRegistrationFormProps } from '@/redux/guests/interfaces';
+import {
+  GuestRegistrationFormProps,
+  ResetForm,
+} from '@/redux/guests/interfaces';
 import { Box, Button, MenuItem, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import { Field, Form, Formik } from 'formik';
@@ -11,10 +14,11 @@ import { guestRegistrationSchema } from './guestRegistration.schema';
 import { speechLengthOptions } from './speechLengthOptions';
 
 interface IProps {
-  onSubmit: (values: GuestRegistrationFormProps) => void;
+  onSubmit: (values: GuestRegistrationFormProps, resetForm: ResetForm) => void;
+  formSubmitMessage: string;
 }
 
-const GuestRegistration = ({ onSubmit }: IProps) => {
+const GuestRegistration = ({ onSubmit, formSubmitMessage }: IProps) => {
   return (
     <Formik
       initialValues={{
@@ -31,7 +35,7 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
         specialNeeds: '',
       }}
       validationSchema={guestRegistrationSchema}
-      onSubmit={onSubmit}
+      onSubmit={(values, { resetForm }) => onSubmit(values, resetForm)}
     >
       {({ values, touched, setFieldValue, errors }) => (
         <Form>
@@ -171,6 +175,20 @@ const GuestRegistration = ({ onSubmit }: IProps) => {
                 {t('guestForm.submit')}
               </Button>
             </Box>
+            {formSubmitMessage && (
+              <Typography
+                variant="h5"
+                mx="auto"
+                color={
+                  formSubmitMessage ===
+                  t('formValidation.formSubmitMessageError')
+                    ? 'error.main'
+                    : 'success.main'
+                }
+              >
+                {formSubmitMessage}
+              </Typography>
+            )}
           </Stack>
         </Form>
       )}

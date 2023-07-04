@@ -2,6 +2,8 @@ export const translationsPL = {
   common: {
     yes: 'Tak',
     no: 'Nie',
+    none: 'BRAK',
+    actions: 'Akcje',
     guest: 'Gość',
     guests: 'Goście',
     nameAndSurrname: 'Imię i nazwisko',
@@ -19,7 +21,6 @@ export const translationsPL = {
     hello: 'Cześć',
     guestRegistration: 'Rejestracja Gościa',
     adminPanel: 'Panel Admina',
-    assign: 'Przypisz',
   },
   guest: {
     checkIn: 'Odprawa',
@@ -33,6 +34,8 @@ export const translationsPL = {
   formValidation: {
     emailInvalid: 'Niepoprawny email',
     emailRequired: 'Podaj Email',
+    formSubmitMessageError: 'Coś poszło nie tak.',
+    formSubmitMessageSuccess: 'Twój formularz został wysłany',
   },
   guestForm: {
     guestForm: 'Formularz Gościa',
