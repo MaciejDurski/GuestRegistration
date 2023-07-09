@@ -9,6 +9,7 @@ import { t } from 'i18next';
 
 const GuestRegistrationContainer = () => {
   const [formSubmitMessage, setFormSubmitMessage] = useState('');
+  const [formSubmitStatus, setFormSubmitStatus] = useState(false);
 
   const onSubmit = async (
     values: GuestRegistrationFormProps,
@@ -17,8 +18,10 @@ const GuestRegistrationContainer = () => {
     const result = await addGuest(values);
     if (!result) {
       setFormSubmitMessage(() => t('formValidation.formSubmitMessageError'));
+      setFormSubmitStatus(true);
     } else {
       setFormSubmitMessage(() => t('formValidation.formSubmitMessageSuccess'));
+      setFormSubmitStatus(false);
       resetForm();
     }
   };
@@ -28,6 +31,7 @@ const GuestRegistrationContainer = () => {
       <GuestRegistration
         onSubmit={onSubmit}
         formSubmitMessage={formSubmitMessage}
+        formSubmitStatus={formSubmitStatus}
       />
     </>
   );

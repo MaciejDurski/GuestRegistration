@@ -16,9 +16,14 @@ import { speechLengthOptions } from './speechLengthOptions';
 interface IProps {
   onSubmit: (values: GuestRegistrationFormProps, resetForm: ResetForm) => void;
   formSubmitMessage: string;
+  formSubmitStatus: boolean;
 }
 
-const GuestRegistration = ({ onSubmit, formSubmitMessage }: IProps) => {
+const GuestRegistration = ({
+  onSubmit,
+  formSubmitMessage,
+  formSubmitStatus,
+}: IProps) => {
   return (
     <Formik
       initialValues={{
@@ -179,12 +184,7 @@ const GuestRegistration = ({ onSubmit, formSubmitMessage }: IProps) => {
               <Typography
                 variant="h5"
                 mx="auto"
-                color={
-                  formSubmitMessage ===
-                  t('formValidation.formSubmitMessageError')
-                    ? 'error.main'
-                    : 'success.main'
-                }
+                color={formSubmitStatus ? 'error.main' : 'success.main'}
               >
                 {formSubmitMessage}
               </Typography>

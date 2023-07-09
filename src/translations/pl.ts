@@ -2,7 +2,7 @@ export const translationsPL = {
   common: {
     yes: 'Tak',
     no: 'Nie',
-    none: 'BRAK',
+    none: 'Brak',
     actions: 'Akcje',
     guest: 'Gość',
     guests: 'Goście',

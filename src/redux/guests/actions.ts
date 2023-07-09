@@ -17,9 +17,9 @@ export const fetchGuests = createAsyncThunk('guests/fetchGuests', async () => {
 
 export const updateGuest = createAsyncThunk(
   'guests/updateGuest',
-  async (guest: IGuest) => {
+  async (editedGuest: IGuest) => {
     try {
-      const data = await setGuest(guest);
+      const data = await setGuest(editedGuest);
       return data;
     } catch (err) {
       console.error(err);

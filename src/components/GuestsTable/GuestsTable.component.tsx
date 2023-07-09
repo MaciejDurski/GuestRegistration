@@ -78,9 +78,14 @@ const GuestsTable = ({ guests, users }: IProps) => {
         headerName: i18next.t<string>('common.guardian'),
         width: 100,
         valueGetter: ({ row }) =>
-          !row.organizer ? i18next.t<string>('common.none') : row.organizer,
+          !row.organizer
+            ? i18next.t<string>('common.none').toUpperCase()
+            : row.organizer,
         type: 'singleSelect',
-        valueOptions: [i18next.t<string>('common.none'), ...usersNames],
+        valueOptions: [
+          i18next.t<string>('common.none').toUpperCase(),
+          ...usersNames,
+        ],
         editable: true,
       },
       {

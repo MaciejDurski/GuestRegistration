@@ -1,6 +1,6 @@
 import { Box, CircularProgress, Fab } from '@mui/material';
 import { Check, Save } from '@mui/icons-material';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { GridCellParams, GridRowId } from '@mui/x-data-grid';
 import { updateGuest } from '@/redux/guests/actions';
 import { useAppDispatch } from '@/redux/store';
@@ -8,7 +8,7 @@ import { useAppDispatch } from '@/redux/store';
 interface IProps {
   params: GridCellParams;
   rowId: GridRowId | null;
-  setRowId: (arg: null) => void;
+  setRowId: Dispatch<SetStateAction<GridRowId | null>>;
 }
 
 const UsersActions = ({ params, rowId, setRowId }: IProps) => {
@@ -18,7 +18,7 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    console.log(params);
+
     const result = await dispatch(updateGuest(params.row));
 
     if (result) {
