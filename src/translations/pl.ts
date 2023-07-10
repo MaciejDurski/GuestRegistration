@@ -31,6 +31,9 @@ export const translationsPL = {
     speechLength: 'Długość prezentacji (minuty)',
     specialRequirements: 'Specjalne wymagania',
   },
+  validation: {
+    deleteGuest: 'Czy jesteś pewny, że chcesz usunąć tego gościa?',
+  },
   formValidation: {
     emailInvalid: 'Niepoprawny email',
     emailRequired: 'Podaj Email',

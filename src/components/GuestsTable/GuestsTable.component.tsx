@@ -3,8 +3,9 @@ import { IUser } from '@/redux/users/interfaces';
 import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid';
 import dayjs from 'dayjs';
 import i18next from 'i18next';
+import { useMemo, useState } from 'react';
+import { speechLengthOptions } from '../GuestRegistration/speechLengthOptions';
 import UsersActions from './UsersActions';
-import { useState, useMemo } from 'react';
 
 interface IProps {
   guests: IGuest[];
@@ -18,22 +19,35 @@ const GuestsTable = ({ guests, users }: IProps) => {
     return `${user.firstName} ${user.lastName}`;
   });
 
+  const speechLengthOptionsArray = Object.entries(speechLengthOptions).map(
+    ([name]) => {
+      return name;
+    }
+  );
+
   const columns: GridColDef[] = useMemo(
     () => [
       {
         field: 'actions',
         headerName: i18next.t<string>('common.actions'),
-        width: 50,
+        width: 100,
         type: 'actions',
         renderCell: (params) => (
           <UsersActions {...{ params, rowId, setRowId }} />
         ),
       },
       {
-        field: 'name',
-        headerName: i18next.t<string>('common.nameAndSurrname'),
-        valueGetter: ({ row }) => `${row.firstName} ${row.lastName}`,
-        width: 130,
+        field: 'firstName',
+        headerName: i18next.t<string>('common.firstName'),
+
+        width: 100,
+        editable: true,
+      },
+      {
+        field: 'lastName',
+        headerName: i18next.t<string>('common.lastName'),
+
+        width: 100,
         editable: true,
       },
       {
@@ -52,6 +66,7 @@ const GuestsTable = ({ guests, users }: IProps) => {
         field: 'checkIn',
         headerName: i18next.t<string>('guest.checkIn'),
         width: 67,
+        type: 'boolean',
         editable: true,
       },
       {
@@ -95,7 +110,7 @@ const GuestsTable = ({ guests, users }: IProps) => {
         editable: true,
       },
       {
-        field: 'accommodation',
+        field: 'accomodation',
         headerName: i18next.t<string>('guest.accommodation'),
         width: 50,
         editable: true,
@@ -118,6 +133,12 @@ const GuestsTable = ({ guests, users }: IProps) => {
         field: 'speechLength',
         headerName: i18next.t<string>('guest.speechLength'),
         width: 60,
+        type: 'singleSelect',
+        valueGetter: ({ row }) => (!row.speechLength ? null : row.speechLength),
+        valueOptions: [
+          i18next.t<string>('common.none').toUpperCase(),
+          ...speechLengthOptionsArray,
+        ],
         editable: true,
       },
       {
@@ -126,16 +147,19 @@ const GuestsTable = ({ guests, users }: IProps) => {
         editable: true,
       },
     ],
-    [rowId, usersNames]
+    [rowId, usersNames, speechLengthOptionsArray]
   );
 
   return (
     <DataGrid
       rows={guests}
       columns={columns}
-      getRowId={(row) => row.id}
       autoHeight
-      onCellEditStart={(params) => setRowId(params.id)}
+      editMode="row"
+      getRowId={(row) => row.id}
+      onRowEditStart={(params) => setRowId(params.id)}
+      // onRowEditStop={(params) => setRowId(params.id)}
+      // onCellEditStart={(params) => setRowId(params.id)}
     />
   );
 };

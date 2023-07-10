@@ -6,7 +6,14 @@ export const addGuest = async (guest: GuestRegistrationFormProps) => {
   try {
     const reference = ref(db, 'guests/');
     const newReference = await push(reference);
-    set(newReference, guest);
+    const guestWithAllProps = {
+      checkIn: false,
+      type: '',
+      organizer: '',
+      accomodation: '',
+      ...guest,
+    };
+    set(newReference, guestWithAllProps);
     return guest;
   } catch (error) {
     console.error(error);

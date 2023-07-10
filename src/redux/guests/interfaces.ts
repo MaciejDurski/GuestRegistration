@@ -15,7 +15,7 @@ export interface IGuest {
   lastName: string;
   checkIn?: boolean;
   type?: string;
-  organizer?: number;
+  organizer?: string;
   email: string;
   tel: string;
   arrival: string;
@@ -33,22 +33,13 @@ export type GuestRegistrationFormProps = Omit<
   'id' | 'checkIn' | 'type' | 'organizer' | 'accommodation'
 >;
 
+type GuestRegistrationFormPropsRequired = Required<GuestRegistrationFormProps>;
+
+interface GuestRegistrationResetFormProps
+  extends Omit<GuestRegistrationFormPropsRequired, 'SpeechLength'> {
+  speechLength: null;
+}
+
 export type ResetForm = (
-  nextState?:
-    | Partial<
-        FormikState<{
-          firstName: string;
-          lastName: string;
-          email: string;
-          tel: string;
-          arrival: string;
-          departure: string;
-          accomodationComment: string;
-          presents: boolean;
-          ownsPc: boolean;
-          speechLength: null;
-          specialNeeds: string;
-        }>
-      >
-    | undefined
+  nextState?: Partial<FormikState<GuestRegistrationResetFormProps>> | undefined
 ) => void;

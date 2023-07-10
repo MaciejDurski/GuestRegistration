@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchGuests, updateGuest } from './actions';
+import { deleteGuest, fetchGuests, updateGuest } from './actions';
 import { IGuest } from './interfaces';
 import { Status } from '../enums/status';
 
@@ -32,11 +32,6 @@ export const guestsSlice = createSlice({
       .addCase(fetchGuests.rejected, (state, action) => {
         state.status = Status.FAILED;
         state.error = action.error.message;
-      });
-    builder
-      .addCase(updateGuest.pending, (state) => {
-        state.status = Status.LOADING;
-        state.error = undefined;
       })
       .addCase(updateGuest.fulfilled, (state, { payload }) => {
         state.status = Status.SUCCEEDED;
@@ -49,9 +44,15 @@ export const guestsSlice = createSlice({
           });
         }
       })
-      .addCase(updateGuest.rejected, (state, action) => {
-        state.status = Status.FAILED;
-        state.error = action.error.message;
+      .addCase(deleteGuest.fulfilled, (state, { payload }) => {
+        state.status = Status.SUCCEEDED;
+        if (payload) {
+          const newState = state.guests.filter((guest) => {
+            guest.id !== payload;
+          });
+          // FILTER DAJE SHALLOW COPY, POTRZEBNE JAKIES CZARY?
+          state.guests = newState;
+        }
       });
   },
 });

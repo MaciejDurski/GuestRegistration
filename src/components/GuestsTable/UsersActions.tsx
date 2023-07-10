@@ -1,9 +1,10 @@
 import { Box, CircularProgress, Fab } from '@mui/material';
-import { Check, Save } from '@mui/icons-material';
+import { Check, Delete, Save } from '@mui/icons-material';
 import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { GridCellParams, GridRowId } from '@mui/x-data-grid';
-import { updateGuest } from '@/redux/guests/actions';
+import { deleteGuest, updateGuest } from '@/redux/guests/actions';
 import { useAppDispatch } from '@/redux/store';
+import i18next from 'i18next';
 
 interface IProps {
   params: GridCellParams;
@@ -26,6 +27,20 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
       setRowId(null);
     }
     setLoading(false);
+  };
+  const handleDelete = async () => {
+    if (window.confirm(i18next.t<string>('validation.deleteGuest'))) {
+      setLoading(true);
+      const result = await dispatch(deleteGuest(params.row.id));
+
+      if (result) {
+        setSuccess(true);
+        setRowId(null);
+      }
+      setLoading(false);
+    } else {
+      return;
+    }
   };
 
   useEffect(() => {
@@ -52,7 +67,22 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
         <CircularProgress
           size={45}
           color="primary"
-          sx={{ position: 'absolute', top: 2, left: 2, zIndex: 1 }}
+          sx={{ position: 'absolute', top: 2, left: 3, zIndex: 1 }}
+        />
+      )}
+      <Fab
+        sx={{ width: 40, height: 40, ml: 1 }}
+        color="error"
+        disabled={params.id !== rowId || loading}
+        onClick={handleDelete}
+      >
+        <Delete />
+      </Fab>
+      {loading && (
+        <CircularProgress
+          size={45}
+          color="primary"
+          sx={{ position: 'absolute', top: 2, left: 52, zIndex: 1 }}
         />
       )}
     </Box>
