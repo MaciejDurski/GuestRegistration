@@ -1,4 +1,4 @@
-import { ADMIN_PANEL, ADMIN_USERS } from '@/constants/routes';
+import { USER_PANEL, USER_USERS } from '@/constants/routes';
 import { Tab, Tabs } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import { t } from 'i18next';
@@ -19,15 +19,15 @@ const AdminNavbar = () => {
         <Tab
           label={t('common.guests')}
           component={Link}
-          href={ADMIN_PANEL}
-          value={ADMIN_PANEL}
+          href={USER_PANEL}
+          value={USER_PANEL}
           {...a11yProps(0)}
         />
         <Tab
           label={t('common.organizers')}
           component={Link}
-          href={ADMIN_USERS}
-          value={ADMIN_USERS}
+          href={USER_USERS}
+          value={USER_USERS}
           {...a11yProps(1)}
         />
       </Tabs>

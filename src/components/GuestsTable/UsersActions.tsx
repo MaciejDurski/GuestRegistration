@@ -1,10 +1,10 @@
-import { Box, CircularProgress, Fab } from '@mui/material';
-import { Check, Delete, Save } from '@mui/icons-material';
-import { useState, useEffect, SetStateAction, Dispatch } from 'react';
-import { GridCellParams, GridRowId } from '@mui/x-data-grid';
 import { deleteGuest, updateGuest } from '@/redux/guests/actions';
 import { useAppDispatch } from '@/redux/store';
+import { Check, Delete, Save } from '@mui/icons-material';
+import { Box, CircularProgress, Fab } from '@mui/material';
+import { GridCellParams, GridRowId } from '@mui/x-data-grid';
 import i18next from 'i18next';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 interface IProps {
   params: GridCellParams;
@@ -26,17 +26,21 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
       setSuccess(true);
       setRowId(null);
     }
+
     setLoading(false);
   };
+
   const handleDelete = async () => {
     if (window.confirm(i18next.t<string>('validation.deleteGuest'))) {
       setLoading(true);
+
       const result = await dispatch(deleteGuest(params.row.id));
 
       if (result) {
         setSuccess(true);
         setRowId(null);
       }
+
       setLoading(false);
     } else {
       return;

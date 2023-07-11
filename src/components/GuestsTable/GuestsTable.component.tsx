@@ -134,7 +134,10 @@ const GuestsTable = ({ guests, users }: IProps) => {
         headerName: i18next.t<string>('guest.speechLength'),
         width: 60,
         type: 'singleSelect',
-        valueGetter: ({ row }) => (!row.speechLength ? null : row.speechLength),
+        valueGetter: ({ row }) =>
+          !row.speechLength
+            ? i18next.t<string>('common.none').toUpperCase()
+            : row.speechLength,
         valueOptions: [
           i18next.t<string>('common.none').toUpperCase(),
           ...speechLengthOptionsArray,

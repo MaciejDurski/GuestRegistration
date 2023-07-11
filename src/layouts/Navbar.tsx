@@ -1,4 +1,4 @@
-import { ADMIN_PANEL, HOME, LANDING_PAGE, LOGIN } from '@/constants/routes';
+import { USER_PANEL, GUEST, LANDING_PAGE, LOGIN } from '@/constants/routes';
 import { logoutUser } from '@/firebase/auth/logoutUser';
 import { auth } from '@/firebase/config';
 import { Box, Button, Stack, Typography } from '@mui/material';
@@ -19,7 +19,7 @@ export const Navbar = () => {
 
   const logout = async () => {
     await logoutUser();
-    router.push(HOME);
+    router.push(GUEST);
   };
 
   return (
@@ -56,12 +56,12 @@ export const Navbar = () => {
           >
             {user && !loading && (
               <>
-                <Link href={HOME}>
+                <Link href={GUEST}>
                   <Button color="primary">
                     {t('common.guestRegistration')}
                   </Button>
                 </Link>
-                <Link href="/admin">
+                <Link href={USER_PANEL}>
                   <Button color="primary">{t('common.adminPanel')}</Button>
                 </Link>
                 <Typography
@@ -82,7 +82,7 @@ export const Navbar = () => {
             )}
           </Stack>
         </Toolbar>
-        {router.pathname.includes(ADMIN_PANEL) && <AdminNavbar />}
+        {router.pathname.includes(USER_PANEL) && <AdminNavbar />}
       </Container>
     </AppBar>
   );
