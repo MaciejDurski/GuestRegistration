@@ -25,13 +25,13 @@ export const guestsSlice = createSlice({
         state.status = Status.LOADING;
         state.error = undefined;
       })
-      .addCase(fetchGuests.fulfilled, (state, { payload }) => {
-        state.status = Status.SUCCEEDED;
-        state.guests = payload;
-      })
       .addCase(fetchGuests.rejected, (state, action) => {
         state.status = Status.FAILED;
         state.error = action.error.message;
+      })
+      .addCase(fetchGuests.fulfilled, (state, { payload }) => {
+        state.status = Status.SUCCEEDED;
+        state.guests = payload;
       })
       .addCase(updateGuest.fulfilled, (state, { payload }) => {
         state.status = Status.SUCCEEDED;

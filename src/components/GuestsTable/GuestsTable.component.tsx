@@ -39,14 +39,12 @@ const GuestsTable = ({ guests, users }: IProps) => {
       {
         field: 'firstName',
         headerName: i18next.t<string>('common.firstName'),
-
         width: 100,
         editable: true,
       },
       {
         field: 'lastName',
         headerName: i18next.t<string>('common.lastName'),
-
         width: 100,
         editable: true,
       },

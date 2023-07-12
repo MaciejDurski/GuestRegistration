@@ -1,6 +1,6 @@
 import {
   GuestRegistrationFormProps,
-  ResetForm,
+  ResetGuestForm,
 } from '@/redux/guests/interfaces';
 import { Box, Button, MenuItem, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
@@ -14,7 +14,10 @@ import { guestRegistrationSchema } from './guestRegistration.schema';
 import { speechLengthOptions } from './speechLengthOptions';
 
 interface IProps {
-  onSubmit: (values: GuestRegistrationFormProps, resetForm: ResetForm) => void;
+  onSubmit: (
+    values: GuestRegistrationFormProps,
+    resetForm: ResetGuestForm
+  ) => void;
   formSubmitMessage: string;
   formSubmitStatus: boolean;
 }

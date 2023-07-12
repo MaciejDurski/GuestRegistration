@@ -1,4 +1,10 @@
-import { USER_PANEL, GUEST, LANDING_PAGE, LOGIN } from '@/constants/routes';
+import {
+  GUEST,
+  LANDING_PAGE,
+  LOGIN,
+  USER_FORM,
+  USER_PANEL,
+} from '@/constants/routes';
 import { logoutUser } from '@/firebase/auth/logoutUser';
 import { auth } from '@/firebase/config';
 import { Box, Button, Stack, Typography } from '@mui/material';
@@ -38,7 +44,7 @@ export const Navbar = () => {
             justifyContent: { xs: 'flex-end', sm: 'space-between' },
           }}
         >
-          <Box display={{ xs: 'none', sm: 'flex' }}>
+          <Box display={{ xs: 'none', md: 'flex' }}>
             <Link href={LANDING_PAGE}>
               <Image
                 src={logo}
@@ -50,8 +56,10 @@ export const Navbar = () => {
             </Link>
           </Box>
           <Stack
-            direction="row"
+            direction={{ xs: 'column', sm: 'row' }}
             spacing={{ xs: 2, sm: 4 }}
+            width={{ xs: '100%' }}
+            justifyContent={{ xs: 'center', sm: 'flex-end' }}
             alignItems={{ xs: 'center' }}
           >
             {user && !loading && (
@@ -61,8 +69,11 @@ export const Navbar = () => {
                     {t('common.guestRegistration')}
                   </Button>
                 </Link>
+                <Link href={USER_FORM}>
+                  <Button color="primary">{t('common.userForm')}</Button>
+                </Link>
                 <Link href={USER_PANEL}>
-                  <Button color="primary">{t('common.adminPanel')}</Button>
+                  <Button color="primary">{t('common.userPanel')}</Button>
                 </Link>
                 <Typography
                   color="primary"

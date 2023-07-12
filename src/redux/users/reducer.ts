@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUsers } from './actions';
+import { fetchUsers, updateUser, deleteUser } from './actions';
 import { IUser } from './interfaces';
 import { Status } from '../enums/status';
 
@@ -25,13 +25,34 @@ export const usersSlice = createSlice({
         state.status = Status.LOADING;
         state.error = undefined;
       })
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.status = Status.FAILED;
+        state.error = action.error.message;
+      })
       .addCase(fetchUsers.fulfilled, (state, { payload }) => {
         state.status = Status.SUCCEEDED;
         state.users = payload;
       })
-      .addCase(fetchUsers.rejected, (state, action) => {
-        state.status = Status.FAILED;
-        state.error = action.error.message;
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        state.status = Status.SUCCEEDED;
+        if (payload) {
+          state.users = state.users.map((user) => {
+            if (user.id === payload.id) {
+              user = payload;
+            }
+            return user;
+          });
+        }
+      })
+      .addCase(deleteUser.fulfilled, (state, { payload }) => {
+        state.status = Status.SUCCEEDED;
+        if (payload) {
+          const newState = state.users.filter((user) => {
+            user.id !== payload;
+          });
+          // FILTER DAJE SHALLOW COPY, POTRZEBNE JAKIES CZARY?
+          state.users = newState;
+        }
       });
   },
 });

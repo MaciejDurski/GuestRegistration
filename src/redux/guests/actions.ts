@@ -2,7 +2,7 @@ import { getGuests } from '@/firebase/database/guest/getGuests';
 import { setGuest } from '@/firebase/database/guest/setGuest';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { IGuest } from './interfaces';
-import { delteGuestFB } from '@/firebase/database/guest/deleteGuest';
+import { deleteGuestFB } from '@/firebase/database/guest/deleteGuest';
 
 export const fetchGuests = createAsyncThunk('guests/fetchGuests', async () => {
   try {
@@ -33,7 +33,7 @@ export const deleteGuest = createAsyncThunk(
   'guests/deleteGuest',
   async (guestId: string) => {
     try {
-      const data = await delteGuestFB(guestId);
+      const data = await deleteGuestFB(guestId);
       return data;
     } catch (err) {
       console.error(err);

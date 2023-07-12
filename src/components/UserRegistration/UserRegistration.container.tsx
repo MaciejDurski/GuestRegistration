@@ -1,21 +1,19 @@
-import { addGuest } from '@/firebase/database/guest/addGuest';
-import {
-  GuestRegistrationFormProps,
-  ResetGuestForm,
-} from '@/redux/guests/interfaces';
+import { addUser } from '@/firebase/database/user/addUser';
+import { ResetUserForm } from '@/redux/users/interfaces';
+import { UserRegistrationFormProps } from '@/redux/users/interfaces';
 import { t } from 'i18next';
 import { useState } from 'react';
-import GuestRegistration from './GuestRegistration.component';
+import UserRegistration from './UserRegistration.component';
 
-const GuestRegistrationContainer = () => {
+const UserRegistrationContainer = () => {
   const [formSubmitMessage, setFormSubmitMessage] = useState('');
   const [formSubmitStatus, setFormSubmitStatus] = useState(false);
 
   const onSubmit = async (
-    values: GuestRegistrationFormProps,
-    resetForm: ResetGuestForm
+    values: UserRegistrationFormProps,
+    resetForm: ResetUserForm
   ) => {
-    const result = await addGuest(values);
+    const result = await addUser(values);
     if (!result) {
       setFormSubmitMessage(() => t('formValidation.formSubmitMessageError'));
       setFormSubmitStatus(true);
@@ -28,7 +26,7 @@ const GuestRegistrationContainer = () => {
 
   return (
     <>
-      <GuestRegistration
+      <UserRegistration
         onSubmit={onSubmit}
         formSubmitMessage={formSubmitMessage}
         formSubmitStatus={formSubmitStatus}
@@ -37,4 +35,4 @@ const GuestRegistrationContainer = () => {
   );
 };
 
-export default GuestRegistrationContainer;
+export default UserRegistrationContainer;

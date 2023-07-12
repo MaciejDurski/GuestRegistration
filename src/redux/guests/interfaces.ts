@@ -40,6 +40,6 @@ interface GuestRegistrationResetFormProps
   speechLength: null;
 }
 
-export type ResetForm = (
+export type ResetGuestForm = (
   nextState?: Partial<FormikState<GuestRegistrationResetFormProps>> | undefined
 ) => void;
