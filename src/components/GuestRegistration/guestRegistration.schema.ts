@@ -13,7 +13,10 @@ export const guestRegistrationSchema = Yup.object({
   email: Yup.string()
     .email(`${t('formValidation.emailInvalid')}`)
     .required(`${t('formValidation.emailRequired')}`),
-  tel: Yup.string().required(`${t('formValidation.telRequired')}`),
+  tel: Yup.string()
+    .required(`${t('formValidation.telRequired')}`)
+    .min(8, `${t('formValidation.telTooShort')}`)
+    .max(13, `${t('formValidation.telTooLong')}`),
   arrival: Yup.string()
     .typeError(`${t('guestFormValidation.dateTypeError')}`)
     .required(`${t('guestFormValidation.arrivalRequired')}`),

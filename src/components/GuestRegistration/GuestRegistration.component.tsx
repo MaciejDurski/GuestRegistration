@@ -7,11 +7,14 @@ import { Stack } from '@mui/system';
 import { Field, Form, Formik } from 'formik';
 import { CheckboxWithLabel, Select } from 'formik-mui';
 import { t } from 'i18next';
+import 'react-phone-input-2/lib/style.css';
 import GMDatePicker from '../common/GMDatePicker';
 import GMInput from '../common/GMInput';
+import { InputError } from '../common/InputError';
 import { arrivalDate, departureDate } from './arrivalAndDepartureDates';
 import { guestRegistrationSchema } from './guestRegistration.schema';
 import { speechLengthOptions } from './speechLengthOptions';
+import StyledPhoneInput from './StyledPhoneInput';
 
 interface IProps {
   onSubmit: (
@@ -80,14 +83,24 @@ const GuestRegistration = ({
               touched={touched.email}
             />
 
-            <Field
-              name="tel"
-              type="tel"
-              label={t('common.tel')}
-              component={GMInput}
-              error={errors.tel}
-              touched={touched.tel}
-            />
+            <Box mt={1}>
+              <StyledPhoneInput
+                inputProps={{
+                  name: 'tel',
+                }}
+                onChange={(tel: string) => {
+                  setFieldValue('tel', tel);
+                  console.log(tel);
+                }}
+                country={'pl'}
+                containerClass={`react-phone-number ${
+                  errors.tel ? 'error' : ''
+                }`}
+              />
+              <Box mt={1}>
+                {errors.tel && touched.tel && <InputError error={errors.tel} />}
+              </Box>
+            </Box>
 
             <Stack direction={{ xs: 'column', sm: 'row' }} pt={2}>
               {/* DateRangePicker is included on Pro package, thus we're using DatePickers */}
@@ -193,6 +206,7 @@ const GuestRegistration = ({
               </Typography>
             )}
           </Stack>
+          {JSON.stringify(values.tel)}
         </Form>
       )}
     </Formik>

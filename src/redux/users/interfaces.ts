@@ -13,6 +13,7 @@ export interface UserRegistrationFormProps {
   firstName: string;
   lastName: string;
   email: string;
+  password: string;
   tel: string;
   isAdmin: boolean;
 }

@@ -8,7 +8,7 @@ import { Field, Form, Formik } from 'formik';
 import { CheckboxWithLabel } from 'formik-mui';
 import { t } from 'i18next';
 import GMInput from '../common/GMInput';
-import { userRegistrationSchema } from './UserRegistration.schema';
+import { userRegistrationSchema } from './userRegistration.schema';
 
 interface IProps {
   onSubmit: (
@@ -30,6 +30,7 @@ const UserRegistration = ({
         firstName: '',
         lastName: '',
         email: '',
+        password: '',
         tel: '',
         isAdmin: false,
       }}
@@ -69,6 +70,14 @@ const UserRegistration = ({
               component={GMInput}
               error={errors.email}
               touched={touched.email}
+            />
+            <Field
+              name="password"
+              type="password"
+              label={t('common.password')}
+              component={GMInput}
+              error={errors.password}
+              touched={touched.password}
             />
 
             <Field

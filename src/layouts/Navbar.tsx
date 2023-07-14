@@ -1,10 +1,4 @@
-import {
-  GUEST,
-  LANDING_PAGE,
-  LOGIN,
-  USER_FORM,
-  USER_PANEL,
-} from '@/constants/routes';
+import { GUEST, LANDING_PAGE, LOGIN, USER_PANEL } from '@/constants/routes';
 import { logoutUser } from '@/firebase/auth/logoutUser';
 import { auth } from '@/firebase/config';
 import { Box, Button, Stack, Typography } from '@mui/material';
@@ -18,9 +12,11 @@ import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import logo from '../public/logo.png';
 import AdminNavbar from './AdminNavbar';
+import { useIsAdmin } from '@/firebase/database/user/useIsAdmin';
 
 export const Navbar = () => {
   const [user, loading] = useAuthState(auth);
+  const { isAdmin } = useIsAdmin(user);
   const router = useRouter();
 
   const logout = async () => {
@@ -37,7 +33,9 @@ export const Navbar = () => {
         minHeight: '85px',
       }}
     >
-      <Container>
+      <Container
+        sx={{ paddingLeft: { xs: 0, sm: 2 }, paddingRight: { xs: 0, sm: 2 } }}
+      >
         <Toolbar
           disableGutters
           sx={{
@@ -69,9 +67,6 @@ export const Navbar = () => {
                     {t('common.guestRegistration')}
                   </Button>
                 </Link>
-                <Link href={USER_FORM}>
-                  <Button color="primary">{t('common.userForm')}</Button>
-                </Link>
                 <Link href={USER_PANEL}>
                   <Button color="primary">{t('common.userPanel')}</Button>
                 </Link>
@@ -93,7 +88,9 @@ export const Navbar = () => {
             )}
           </Stack>
         </Toolbar>
-        {router.pathname.includes(USER_PANEL) && <AdminNavbar />}
+        {router.pathname.includes(USER_PANEL) && (
+          <AdminNavbar isAdmin={isAdmin} />
+        )}
       </Container>
     </AppBar>
   );

@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@/redux/store';
-import { updateUser, deleteUser } from '@/redux/users/actions';
+import { deleteUser, updateUser } from '@/redux/users/actions';
 import { Check, Delete, Save } from '@mui/icons-material';
 import { Box, CircularProgress, Fab } from '@mui/material';
 import { GridCellParams, GridRowId } from '@mui/x-data-grid';
@@ -15,6 +15,7 @@ interface IProps {
 const UsersActions = ({ params, rowId, setRowId }: IProps) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const handleSubmit = async () => {

@@ -3,6 +3,9 @@ import { useState, useMemo } from 'react';
 import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid';
 import i18next from 'i18next';
 import AdminActions from './AdminActions';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase/config';
+import { useIsAdmin } from '@/firebase/database/user/useIsAdmin';
 
 interface IProps {
   users: IUser[];
@@ -10,6 +13,8 @@ interface IProps {
 
 const UsersTable = ({ users }: IProps) => {
   const [rowId, setRowId] = useState<GridRowId | null>(null);
+  const [user] = useAuthState(auth);
+  const { isAdmin } = useIsAdmin(user);
 
   const columns: GridColDef[] = useMemo(
     () => [
@@ -26,32 +31,31 @@ const UsersTable = ({ users }: IProps) => {
         field: 'firstName',
         headerName: i18next.t<string>('common.firstName'),
         width: 100,
-        editable: true,
+        editable: isAdmin && true,
       },
       {
         field: 'lastName',
         headerName: i18next.t<string>('common.lastName'),
         width: 100,
-        editable: true,
+        editable: isAdmin && true,
       },
       {
         field: 'email',
         headerName: i18next.t<string>('common.email'),
         width: 180,
-        editable: true,
       },
       {
         field: 'tel',
         headerName: i18next.t<string>('common.tel'),
         width: 120,
-        editable: true,
+        editable: isAdmin && true,
       },
       {
         field: 'isAdmin',
         headerName: i18next.t<string>('common.admin'),
         width: 100,
         type: 'boolean',
-        editable: true,
+        editable: isAdmin && true,
       },
     ],
     [rowId]

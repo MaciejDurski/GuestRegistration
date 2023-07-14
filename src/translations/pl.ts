@@ -45,8 +45,11 @@ export const translationsPL = {
     lastNameTooLong: 'Nazwisko musi się składać z mniej niż 50 liter',
     lastNameRequired: 'Podaj nazwisko',
     telRequired: 'Podaj numer telefonu',
+    telTooShort: 'Numer telefonu musi się składać z więcej niż 8 znaków',
+    telTooLong: 'Numer telefonu musi się składać z mniej niż 15 znaków',
     emailInvalid: 'Niepoprawny email',
     emailRequired: 'Podaj Email',
+    passwordRequired: 'Podaj hasło',
     formSubmitMessageError: 'Coś poszło nie tak.',
     formSubmitMessageSuccess: 'Twój formularz został wysłany',
   },
@@ -80,8 +83,5 @@ export const translationsPL = {
   },
   userFormValidation: {
     isAdminRequired: 'Podaj status organizatora',
-  },
-  loginUserFormValidation: {
-    passwordRequired: 'Podaj hasło',
   },
 };
