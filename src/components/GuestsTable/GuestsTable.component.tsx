@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import i18next from 'i18next';
 import { useMemo, useState } from 'react';
 import { speechLengthOptions } from '../GuestRegistration/speechLengthOptions';
+import { formatPolishTelNumber } from './formatPolishTelNumber';
 import UsersActions from './UsersActions';
 
 interface IProps {
@@ -57,7 +58,8 @@ const GuestsTable = ({ guests, users }: IProps) => {
       {
         field: 'tel',
         headerName: i18next.t<string>('common.tel'),
-        width: 93,
+        width: 110,
+        valueGetter: ({ row }) => formatPolishTelNumber(row.tel),
         editable: true,
       },
       {

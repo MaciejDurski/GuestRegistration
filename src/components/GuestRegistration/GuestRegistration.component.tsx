@@ -90,7 +90,6 @@ const GuestRegistration = ({
                 }}
                 onChange={(tel: string) => {
                   setFieldValue('tel', tel);
-                  console.log(tel);
                 }}
                 country={'pl'}
                 containerClass={`react-phone-number ${
@@ -206,7 +205,6 @@ const GuestRegistration = ({
               </Typography>
             )}
           </Stack>
-          {JSON.stringify(values.tel)}
         </Form>
       )}
     </Formik>
