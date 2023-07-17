@@ -8,52 +8,50 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 interface IProps {
   params: GridCellParams;
-  rowId: GridRowId | null;
-  setRowId: Dispatch<SetStateAction<GridRowId | null>>;
+  selectedRowId: GridRowId | null;
+  setSelectedRowId: Dispatch<SetStateAction<GridRowId | null>>;
 }
 
-const UsersActions = ({ params, rowId, setRowId }: IProps) => {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleSubmit = async () => {
-    setLoading(true);
+    setIsLoading(true);
 
     const result = await dispatch(updateGuest(params.row));
 
     if (result) {
-      setSuccess(true);
-      setRowId(null);
+      setIsSuccess(true);
+      setSelectedRowId(null);
     }
 
-    setLoading(false);
+    setIsLoading(false);
   };
 
   const handleDelete = async () => {
     if (window.confirm(i18next.t<string>('validation.deleteGuest'))) {
-      setLoading(true);
+      setIsLoading(true);
 
       const result = await dispatch(deleteGuest(params.row.id));
 
       if (result) {
-        setSuccess(true);
-        setRowId(null);
+        setIsSuccess(true);
+        setSelectedRowId(null);
       }
 
-      setLoading(false);
-    } else {
-      return;
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    if (rowId === params.id && success) setSuccess(false);
-  }, [rowId]);
+    if (selectedRowId === params.id && isSuccess) setIsSuccess(false);
+  }, [selectedRowId]);
 
   return (
     <Box sx={{ m: 1, posittion: 'relative' }}>
-      {success ? (
+      {isSuccess ? (
         <Fab color="success" sx={{ width: 40, height: 40 }}>
           <Check />
         </Fab>
@@ -61,13 +59,13 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
         <Fab
           sx={{ width: 40, height: 40 }}
           color="primary"
-          disabled={params.id !== rowId || loading}
+          disabled={params.id !== selectedRowId || isLoading}
           onClick={handleSubmit}
         >
           <Save />
         </Fab>
       )}
-      {loading && (
+      {isLoading && (
         <CircularProgress
           size={45}
           color="primary"
@@ -77,12 +75,12 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
       <Fab
         sx={{ width: 40, height: 40, ml: 1 }}
         color="error"
-        disabled={params.id !== rowId || loading}
+        disabled={params.id !== selectedRowId || isLoading}
         onClick={handleDelete}
       >
         <Delete />
       </Fab>
-      {loading && (
+      {isLoading && (
         <CircularProgress
           size={45}
           color="primary"

@@ -14,17 +14,11 @@ interface IProps {
 }
 
 const GuestsTable = ({ guests, users }: IProps) => {
-  const [rowId, setRowId] = useState<GridRowId | null>(null);
+  const [selectedRowId, setSelectedRowId] = useState<GridRowId | null>(null);
 
-  const usersNames = users.map((user) => {
-    return `${user.firstName} ${user.lastName}`;
-  });
+  const usersNames = users.map((user) => `${user.firstName} ${user.lastName}`);
 
-  const speechLengthOptionsArray = Object.entries(speechLengthOptions).map(
-    ([name]) => {
-      return name;
-    }
-  );
+  const speechLengthOptionsArray = Object.keys(speechLengthOptions);
 
   const columns: GridColDef[] = useMemo(
     () => [
@@ -34,7 +28,7 @@ const GuestsTable = ({ guests, users }: IProps) => {
         width: 100,
         type: 'actions',
         renderCell: (params) => (
-          <UsersActions {...{ params, rowId, setRowId }} />
+          <UsersActions {...{ params, selectedRowId, setSelectedRowId }} />
         ),
       },
       {
@@ -150,7 +144,7 @@ const GuestsTable = ({ guests, users }: IProps) => {
         editable: true,
       },
     ],
-    [rowId, usersNames, speechLengthOptionsArray]
+    [selectedRowId, usersNames, speechLengthOptionsArray]
   );
 
   return (
@@ -160,9 +154,7 @@ const GuestsTable = ({ guests, users }: IProps) => {
       autoHeight
       editMode="row"
       getRowId={(row) => row.id}
-      onRowEditStart={(params) => setRowId(params.id)}
-      // onRowEditStop={(params) => setRowId(params.id)}
-      // onCellEditStart={(params) => setRowId(params.id)}
+      onRowEditStart={(params) => setSelectedRowId(params.id)}
     />
   );
 };

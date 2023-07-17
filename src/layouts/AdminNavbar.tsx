@@ -1,4 +1,4 @@
-import { USER_FORM, USER_PANEL, USERS_TABLE } from '@/constants/routes';
+import { USER_FORM, GUESTS_TABLE, USERS_TABLE } from '@/constants/routes';
 import { Tab, Tabs } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import { t } from 'i18next';
@@ -34,8 +34,8 @@ const AdminNavbar = ({ isAdmin }: IProps) => {
           }}
           label={t('common.guests')}
           component={Link}
-          href={USER_PANEL}
-          value={USER_PANEL}
+          href={GUESTS_TABLE}
+          value={GUESTS_TABLE}
           {...a11yProps(0)}
         />
         <Tab

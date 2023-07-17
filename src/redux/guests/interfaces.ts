@@ -36,7 +36,7 @@ export type GuestRegistrationFormProps = Omit<
 type GuestRegistrationFormPropsRequired = Required<GuestRegistrationFormProps>;
 
 interface GuestRegistrationResetFormProps
-  extends Omit<GuestRegistrationFormPropsRequired, 'SpeechLength'> {
+  extends Omit<GuestRegistrationFormPropsRequired, 'speechLength'> {
   speechLength: null;
 }
 

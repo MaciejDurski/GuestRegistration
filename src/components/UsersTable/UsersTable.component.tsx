@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const UsersTable = ({ users }: IProps) => {
-  const [rowId, setRowId] = useState<GridRowId | null>(null);
+  const [selectedRowId, setSelectedRowId] = useState<GridRowId | null>(null);
   const [user] = useAuthState(auth);
   const { isAdmin } = useIsAdmin(user);
 
@@ -24,7 +24,7 @@ const UsersTable = ({ users }: IProps) => {
         width: 100,
         type: 'actions',
         renderCell: (params) => (
-          <AdminActions {...{ params, rowId, setRowId }} />
+          <AdminActions {...{ params, selectedRowId, setSelectedRowId }} />
         ),
       },
       {
@@ -58,7 +58,7 @@ const UsersTable = ({ users }: IProps) => {
         editable: isAdmin && true,
       },
     ],
-    [rowId]
+    [selectedRowId]
   );
 
   return (
@@ -68,7 +68,7 @@ const UsersTable = ({ users }: IProps) => {
       autoHeight
       editMode="row"
       getRowId={(row) => row.id}
-      onRowEditStart={(params) => setRowId(params.id)}
+      onRowEditStart={(params) => setSelectedRowId(params.id)}
     />
   );
 };

@@ -1,7 +1,7 @@
 import { loginUser } from '@/firebase/auth/loginUser';
 import { useRouter } from 'next/router';
 import { LoginForm } from './LoginForm.component';
-import { USER_PANEL } from '@/constants/routes';
+import { GUESTS_TABLE } from '@/constants/routes';
 
 export interface ILogin {
   userEmail: string;
@@ -13,7 +13,7 @@ export const LoginFormContainer = () => {
 
   const handleLogin = async (values: ILogin) => {
     await loginUser(values);
-    router.replace(USER_PANEL);
+    router.replace(GUESTS_TABLE);
   };
 
   return <LoginForm handleLogin={handleLogin} />;

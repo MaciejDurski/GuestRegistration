@@ -47,11 +47,9 @@ export const guestsSlice = createSlice({
       .addCase(deleteGuest.fulfilled, (state, { payload }) => {
         state.status = Status.SUCCEEDED;
         if (payload) {
-          const newState = state.guests.filter((guest) => {
+          state.guests = state.guests.filter((guest) => {
             guest.id !== payload;
           });
-          // FILTER DAJE SHALLOW COPY, POTRZEBNE JAKIES CZARY?
-          state.guests = newState;
         }
       });
   },

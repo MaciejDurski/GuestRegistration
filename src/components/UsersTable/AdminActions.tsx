@@ -8,11 +8,11 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 interface IProps {
   params: GridCellParams;
-  rowId: GridRowId | null;
-  setRowId: Dispatch<SetStateAction<GridRowId | null>>;
+  selectedRowId: GridRowId | null;
+  setSelectedRowId: Dispatch<SetStateAction<GridRowId | null>>;
 }
 
-const UsersActions = ({ params, rowId, setRowId }: IProps) => {
+const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -25,7 +25,7 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
 
     if (result) {
       setSuccess(true);
-      setRowId(null);
+      setSelectedRowId(null);
     }
 
     setLoading(false);
@@ -39,7 +39,7 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
 
       if (result) {
         setSuccess(true);
-        setRowId(null);
+        setSelectedRowId(null);
       }
 
       setLoading(false);
@@ -49,8 +49,8 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
   };
 
   useEffect(() => {
-    if (rowId === params.id && success) setSuccess(false);
-  }, [rowId]);
+    if (selectedRowId === params.id && success) setSuccess(false);
+  }, [selectedRowId]);
 
   return (
     <Box sx={{ m: 1, posittion: 'relative' }}>
@@ -62,7 +62,7 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
         <Fab
           sx={{ width: 40, height: 40 }}
           color="primary"
-          disabled={params.id !== rowId || loading}
+          disabled={params.id !== selectedRowId || loading}
           onClick={handleSubmit}
         >
           <Save />
@@ -78,7 +78,7 @@ const UsersActions = ({ params, rowId, setRowId }: IProps) => {
       <Fab
         sx={{ width: 40, height: 40, ml: 1 }}
         color="error"
-        disabled={params.id !== rowId || loading}
+        disabled={params.id !== selectedRowId || loading}
         onClick={handleDelete}
       >
         <Delete />

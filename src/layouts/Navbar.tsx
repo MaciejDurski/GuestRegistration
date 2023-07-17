@@ -1,6 +1,7 @@
-import { GUEST, LANDING_PAGE, LOGIN, USER_PANEL } from '@/constants/routes';
+import { GUEST, GUESTS_TABLE, LANDING_PAGE, LOGIN } from '@/constants/routes';
 import { logoutUser } from '@/firebase/auth/logoutUser';
 import { auth } from '@/firebase/config';
+import { useIsAdmin } from '@/firebase/database/user/useIsAdmin';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
@@ -12,7 +13,6 @@ import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import logo from '../public/logo.png';
 import AdminNavbar from './AdminNavbar';
-import { useIsAdmin } from '@/firebase/database/user/useIsAdmin';
 
 export const Navbar = () => {
   const [user, loading] = useAuthState(auth);
@@ -67,7 +67,7 @@ export const Navbar = () => {
                     {t('common.guestRegistration')}
                   </Button>
                 </Link>
-                <Link href={USER_PANEL}>
+                <Link href={GUESTS_TABLE}>
                   <Button color="primary">{t('common.userPanel')}</Button>
                 </Link>
                 <Typography
@@ -88,7 +88,7 @@ export const Navbar = () => {
             )}
           </Stack>
         </Toolbar>
-        {router.pathname.includes(USER_PANEL) && (
+        {router.pathname.includes(GUESTS_TABLE) && (
           <AdminNavbar isAdmin={isAdmin} />
         )}
       </Container>

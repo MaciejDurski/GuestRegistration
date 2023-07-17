@@ -1,15 +1,14 @@
 import { addGuest } from '@/firebase/database/guest/addGuest';
+import { Status } from '@/redux/enums/status';
 import {
   GuestRegistrationFormProps,
   ResetGuestForm,
 } from '@/redux/guests/interfaces';
-import { t } from 'i18next';
 import { useState } from 'react';
 import GuestRegistration from './GuestRegistration.component';
 
 const GuestRegistrationContainer = () => {
-  const [formSubmitMessage, setFormSubmitMessage] = useState('');
-  const [formSubmitStatus, setFormSubmitStatus] = useState(false);
+  const [formSubmitStatus, setFormSubmitStatus] = useState<Status>(Status.IDLE);
 
   const onSubmit = async (
     values: GuestRegistrationFormProps,
@@ -17,11 +16,9 @@ const GuestRegistrationContainer = () => {
   ) => {
     const result = await addGuest(values);
     if (!result) {
-      setFormSubmitMessage(() => t('formValidation.formSubmitMessageError'));
-      setFormSubmitStatus(true);
+      setFormSubmitStatus(Status.FAILED);
     } else {
-      setFormSubmitMessage(() => t('formValidation.formSubmitMessageSuccess'));
-      setFormSubmitStatus(false);
+      setFormSubmitStatus(Status.SUCCEEDED);
       resetForm();
     }
   };
@@ -30,7 +27,6 @@ const GuestRegistrationContainer = () => {
     <>
       <GuestRegistration
         onSubmit={onSubmit}
-        formSubmitMessage={formSubmitMessage}
         formSubmitStatus={formSubmitStatus}
       />
     </>
