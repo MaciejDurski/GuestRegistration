@@ -18,7 +18,7 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
 
   const dispatch = useAppDispatch();
 
-  const handleSubmit = async () => {
+  const handleUpdate = async () => {
     setLoading(true);
 
     const result = await dispatch(updateUser(params.row));
@@ -63,7 +63,7 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
           sx={{ width: 40, height: 40 }}
           color="primary"
           disabled={params.id !== selectedRowId || loading}
-          onClick={handleSubmit}
+          onClick={handleUpdate}
         >
           <Save />
         </Fab>

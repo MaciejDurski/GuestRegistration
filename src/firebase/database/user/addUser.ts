@@ -1,16 +1,14 @@
-import { auth, db } from '@/firebase/config';
+import { createUser } from '@/firebase/cloudFunctions';
+import { db } from '@/firebase/config';
 import { UserRegistrationFormProps } from '@/redux/users/interfaces';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
 
-export const addUser = async (user: UserRegistrationFormProps) => {
+export const addUserFB = async (user: UserRegistrationFormProps) => {
   try {
-    const authData = await createUserWithEmailAndPassword(
-      auth,
-      user.email,
-      user.password
-    );
-    const userId = authData.user.uid;
+    const result = await createUser(user);
+
+    const unknownData = result.data as { uid: string };
+    const userId = unknownData.uid;
 
     const reference = ref(db, `users/${userId}`);
 

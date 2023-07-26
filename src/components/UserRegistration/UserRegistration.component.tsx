@@ -1,3 +1,4 @@
+import { Status } from '@/redux/enums/status';
 import {
   ResetUserForm,
   UserRegistrationFormProps,
@@ -15,15 +16,10 @@ interface IProps {
     values: UserRegistrationFormProps,
     resetForm: ResetUserForm
   ) => void;
-  formSubmitMessage: string;
-  formSubmitStatus: boolean;
+  formSubmitStatus: Status;
 }
 
-const UserRegistration = ({
-  onSubmit,
-  formSubmitMessage,
-  formSubmitStatus,
-}: IProps) => {
+const UserRegistration = ({ onSubmit, formSubmitStatus }: IProps) => {
   return (
     <Formik
       initialValues={{
@@ -103,13 +99,19 @@ const UserRegistration = ({
                 {t('guestForm.submit')}
               </Button>
             </Box>
-            {formSubmitMessage && (
+            {formSubmitStatus !== Status.IDLE && (
               <Typography
                 variant="h5"
                 mx="auto"
-                color={formSubmitStatus ? 'error.main' : 'success.main'}
+                color={
+                  formSubmitStatus === Status.FAILED
+                    ? 'error.main'
+                    : 'success.main'
+                }
               >
-                {formSubmitMessage}
+                {formSubmitStatus === Status.FAILED
+                  ? t('formValidation.formSubmitMessageError')
+                  : t('formValidation.formSubmitMessageSuccess')}
               </Typography>
             )}
           </Stack>

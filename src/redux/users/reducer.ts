@@ -47,9 +47,7 @@ export const usersSlice = createSlice({
       .addCase(deleteUser.fulfilled, (state, { payload }) => {
         state.status = Status.SUCCEEDED;
         if (payload) {
-          state.users = state.users.filter((user) => {
-            user.id !== payload;
-          });
+          state.users = state.users.filter((user) => user.id !== payload);
         }
       });
   },

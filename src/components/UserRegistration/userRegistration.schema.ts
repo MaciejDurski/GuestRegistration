@@ -14,6 +14,9 @@ export const userRegistrationSchema = Yup.object({
     .email(`${t('formValidation.emailInvalid')}`)
     .required(`${t('formValidation.emailRequired')}`),
   password: Yup.string().required(`${t('formValidation.passwordRequired')}`),
-  tel: Yup.string().required(`${t('formValidation.telRequired')}`),
+  tel: Yup.string()
+    .required(`${t('formValidation.telRequired')}`)
+    .min(12, `${t('formValidation.telRequired')}`)
+    .max(12, `${t('formValidation.telRequired')}`),
   isAdmin: Yup.boolean().required(`${t('userFormValidation.isAdminRequired')}`),
 });

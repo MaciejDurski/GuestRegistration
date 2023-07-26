@@ -1,25 +1,22 @@
-import { addUser } from '@/firebase/database/user/addUser';
+import { addUserFB } from '@/firebase/database/user/addUser';
+import { Status } from '@/redux/enums/status';
 import { ResetUserForm } from '@/redux/users/interfaces';
 import { UserRegistrationFormProps } from '@/redux/users/interfaces';
-import { t } from 'i18next';
 import { useState } from 'react';
 import UserRegistration from './UserRegistration.component';
 
 const UserRegistrationContainer = () => {
-  const [formSubmitMessage, setFormSubmitMessage] = useState('');
-  const [formSubmitStatus, setFormSubmitStatus] = useState(false);
+  const [formSubmitStatus, setFormSubmitStatus] = useState<Status>(Status.IDLE);
 
   const onSubmit = async (
     values: UserRegistrationFormProps,
     resetForm: ResetUserForm
   ) => {
-    const result = await addUser(values);
+    const result = await addUserFB(values);
     if (!result) {
-      setFormSubmitMessage(() => t('formValidation.formSubmitMessageError'));
-      setFormSubmitStatus(true);
+      setFormSubmitStatus(Status.FAILED);
     } else {
-      setFormSubmitMessage(() => t('formValidation.formSubmitMessageSuccess'));
-      setFormSubmitStatus(false);
+      setFormSubmitStatus(Status.SUCCEEDED);
       resetForm();
     }
   };
@@ -28,7 +25,6 @@ const UserRegistrationContainer = () => {
     <>
       <UserRegistration
         onSubmit={onSubmit}
-        formSubmitMessage={formSubmitMessage}
         formSubmitStatus={formSubmitStatus}
       />
     </>

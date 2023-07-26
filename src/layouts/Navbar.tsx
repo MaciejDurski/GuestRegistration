@@ -1,7 +1,6 @@
-import { GUEST, GUESTS_TABLE, LANDING_PAGE, LOGIN } from '@/constants/routes';
+import { GUEST_FORM, LANDING_PAGE, LOGIN, PANEL } from '@/constants/routes';
 import { logoutUser } from '@/firebase/auth/logoutUser';
-import { auth } from '@/firebase/config';
-import { useIsAdmin } from '@/firebase/database/user/useIsAdmin';
+import { useIsAdmin } from '@/firebase/auth/useIsAdmin';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
@@ -10,18 +9,21 @@ import { t } from 'i18next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useEffect } from 'react';
 import logo from '../public/logo.png';
 import AdminNavbar from './AdminNavbar';
 
 export const Navbar = () => {
-  const [user, loading] = useAuthState(auth);
-  const { isAdmin } = useIsAdmin(user);
+  const { isAdmin, user, loading } = useIsAdmin();
   const router = useRouter();
+
+  useEffect(() => {
+    console.log('isAdmin', isAdmin);
+  }, [isAdmin]);
 
   const logout = async () => {
     await logoutUser();
-    router.push(GUEST);
+    router.push(GUEST_FORM);
   };
 
   return (
@@ -62,12 +64,12 @@ export const Navbar = () => {
           >
             {user && !loading && (
               <>
-                <Link href={GUEST}>
+                <Link href={GUEST_FORM}>
                   <Button color="primary">
                     {t('common.guestRegistration')}
                   </Button>
                 </Link>
-                <Link href={GUESTS_TABLE}>
+                <Link href={PANEL}>
                   <Button color="primary">{t('common.userPanel')}</Button>
                 </Link>
                 <Typography
@@ -88,9 +90,7 @@ export const Navbar = () => {
             )}
           </Stack>
         </Toolbar>
-        {router.pathname.includes(GUESTS_TABLE) && (
-          <AdminNavbar isAdmin={isAdmin} />
-        )}
+        {router.pathname.includes(PANEL) && <AdminNavbar isAdmin={isAdmin} />}
       </Container>
     </AppBar>
   );

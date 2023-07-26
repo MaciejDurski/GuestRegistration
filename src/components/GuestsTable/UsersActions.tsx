@@ -17,7 +17,7 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const dispatch = useAppDispatch();
 
-  const handleSubmit = async () => {
+  const handleUpdate = async () => {
     setIsLoading(true);
 
     const result = await dispatch(updateGuest(params.row));
@@ -37,7 +37,6 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
       const result = await dispatch(deleteGuest(params.row.id));
 
       if (result) {
-        setIsSuccess(true);
         setSelectedRowId(null);
       }
 
@@ -50,7 +49,10 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
   }, [selectedRowId]);
 
   return (
-    <Box sx={{ m: 1, posittion: 'relative' }}>
+    <Box
+      onClick={() => console.log(params.row.tel)}
+      sx={{ m: 1, posittion: 'relative' }}
+    >
       {isSuccess ? (
         <Fab color="success" sx={{ width: 40, height: 40 }}>
           <Check />
@@ -60,7 +62,7 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
           sx={{ width: 40, height: 40 }}
           color="primary"
           disabled={params.id !== selectedRowId || isLoading}
-          onClick={handleSubmit}
+          onClick={handleUpdate}
         >
           <Save />
         </Fab>

@@ -46,10 +46,9 @@ export const guestsSlice = createSlice({
       })
       .addCase(deleteGuest.fulfilled, (state, { payload }) => {
         state.status = Status.SUCCEEDED;
+
         if (payload) {
-          state.guests = state.guests.filter((guest) => {
-            guest.id !== payload;
-          });
+          state.guests = state.guests.filter((guest) => guest.id !== payload);
         }
       });
   },
