@@ -16,7 +16,7 @@ interface IProps {
 const GuestsTable = ({ guests, users }: IProps) => {
   const [selectedRowId, setSelectedRowId] = useState<GridRowId | null>(null);
 
-  const usersNames = users.map((user) => `${user.firstName} ${user.lastName}`);
+  const organizers = users.map((user) => `${user.firstName} ${user.lastName}`);
 
   const speechLengthOptionsArray = Object.keys(speechLengthOptions);
 
@@ -28,7 +28,9 @@ const GuestsTable = ({ guests, users }: IProps) => {
         width: 100,
         type: 'actions',
         renderCell: (params) => (
-          <UsersActions {...{ params, selectedRowId, setSelectedRowId }} />
+          <UsersActions
+            {...{ params, selectedRowId, setSelectedRowId, users }}
+          />
         ),
       },
       {
@@ -93,7 +95,7 @@ const GuestsTable = ({ guests, users }: IProps) => {
         type: 'singleSelect',
         valueOptions: [
           i18next.t<string>('common.none').toUpperCase(),
-          ...usersNames,
+          ...organizers,
         ],
         editable: true,
       },
@@ -144,7 +146,7 @@ const GuestsTable = ({ guests, users }: IProps) => {
         editable: true,
       },
     ],
-    [selectedRowId, usersNames, speechLengthOptionsArray]
+    [selectedRowId, organizers, speechLengthOptionsArray, users]
   );
 
   return (

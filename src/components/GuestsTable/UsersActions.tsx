@@ -1,5 +1,6 @@
 import { deleteGuest, updateGuest } from '@/redux/guests/actions';
 import { useAppDispatch } from '@/redux/store';
+import { IUser } from '@/redux/users/interfaces';
 import { Check, Delete, Save } from '@mui/icons-material';
 import { Box, CircularProgress, Fab } from '@mui/material';
 import { GridCellParams, GridRowId } from '@mui/x-data-grid';
@@ -10,9 +11,15 @@ interface IProps {
   params: GridCellParams;
   selectedRowId: GridRowId | null;
   setSelectedRowId: Dispatch<SetStateAction<GridRowId | null>>;
+  users: IUser[];
 }
 
-const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
+const UsersActions = ({
+  params,
+  selectedRowId,
+  setSelectedRowId,
+  users,
+}: IProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const dispatch = useAppDispatch();
@@ -20,6 +27,12 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
   const handleUpdate = async () => {
     setIsLoading(true);
 
+    if (users.filter((user) => params.row.organizer === user.id).length === 0) {
+      const selectedOrganizer = users.filter(
+        (user) => `${user.firstName} ${user.lastName}` === params.row.organizer
+      );
+      params.row.organizer = selectedOrganizer[0].id;
+    }
     const result = await dispatch(updateGuest(params.row));
 
     if (result) {
@@ -50,7 +63,7 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
 
   return (
     <Box
-      onClick={() => console.log(params.row.tel)}
+      onClick={() => console.log(params.row)}
       sx={{ m: 1, posittion: 'relative' }}
     >
       {isSuccess ? (
