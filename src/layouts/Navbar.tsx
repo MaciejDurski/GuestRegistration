@@ -9,17 +9,12 @@ import { t } from 'i18next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import logo from '../public/logo.png';
 import AdminNavbar from './AdminNavbar';
 
 export const Navbar = () => {
   const { isAdmin, user, loading } = useIsAdmin();
   const router = useRouter();
-
-  useEffect(() => {
-    console.log('isAdmin', isAdmin);
-  }, [isAdmin]);
 
   const logout = async () => {
     await logoutUser();
@@ -84,9 +79,9 @@ export const Navbar = () => {
               </>
             )}
             {!user && !loading && (
-              <Button variant="outlined">
-                <Link href={LOGIN}>{t('common.organizer')}</Link>
-              </Button>
+              <Link href={LOGIN}>
+                <Button variant="outlined"> {t('common.organizer')}</Button>
+              </Link>
             )}
           </Stack>
         </Toolbar>

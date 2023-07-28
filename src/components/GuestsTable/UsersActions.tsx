@@ -27,7 +27,10 @@ const UsersActions = ({
   const handleUpdate = async () => {
     setIsLoading(true);
 
-    if (users.filter((user) => params.row.organizer === user.id).length === 0) {
+    if (
+      users.filter((user) => params.row.organizer === user.id).length === 0 &&
+      params.row.organizer !== i18next.t<string>('common.none').toUpperCase()
+    ) {
       const selectedOrganizer = users.filter(
         (user) => `${user.firstName} ${user.lastName}` === params.row.organizer
       );
@@ -62,10 +65,7 @@ const UsersActions = ({
   }, [selectedRowId]);
 
   return (
-    <Box
-      onClick={() => console.log(params.row)}
-      sx={{ m: 1, posittion: 'relative' }}
-    >
+    <Box sx={{ m: 1, position: 'relative' }}>
       {isSuccess ? (
         <Fab color="success" sx={{ width: 40, height: 40 }}>
           <Check />
@@ -84,7 +84,7 @@ const UsersActions = ({
         <CircularProgress
           size={45}
           color="primary"
-          sx={{ position: 'absolute', top: 2, left: 3, zIndex: 1 }}
+          sx={{ position: 'absolute', top: -2, left: -3, zIndex: 1 }}
         />
       )}
       <Fab
@@ -99,7 +99,7 @@ const UsersActions = ({
         <CircularProgress
           size={45}
           color="primary"
-          sx={{ position: 'absolute', top: 2, left: 52, zIndex: 1 }}
+          sx={{ position: 'absolute', top: -2, left: 46, zIndex: 1 }}
         />
       )}
     </Box>

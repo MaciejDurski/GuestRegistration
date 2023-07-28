@@ -12,11 +12,7 @@ export const useIsAdmin = () => {
         const idTokenResult = await user?.getIdTokenResult();
         const AdminClaim = await idTokenResult?.claims.admin;
 
-        if (AdminClaim) {
-          setIsAdmin(true);
-        } else {
-          setIsAdmin(false);
-        }
+        setIsAdmin(!!AdminClaim);
       } catch (error) {
         console.error(error);
       }

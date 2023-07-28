@@ -50,15 +50,9 @@ exports.createUser = functions.https.onCall(async (request, context) => {
         password: request.password,
       });
 
-      if (request.isAdmin) {
-        await admin.auth().setCustomUserClaims(createdUser.uid, {
-          admin: true,
-        });
-      } else {
-        await admin.auth().setCustomUserClaims(createdUser.uid, {
-          admin: false,
-        });
-      }
+      await admin.auth().setCustomUserClaims(createdUser.uid, {
+        admin: !!request.isAdmin,
+      });
 
       return createdUser;
     } else {
@@ -80,17 +74,9 @@ exports.updateUser = functions.https.onCall(async (request, context) => {
         phoneNumber: request.tel,
       });
 
-      if (request.isAdmin) {
-        await admin.auth().setCustomUserClaims(request.id, {
-          admin: true,
-        });
-        updatedUser.customClaims.admin = true;
-      } else {
-        await admin.auth().setCustomUserClaims(request.id, {
-          admin: false,
-        });
-        updatedUser.customClaims.admin = false;
-      }
+      await admin.auth().setCustomUserClaims(createdUser.uid, {
+        admin: !!request.isAdmin,
+      });
 
       return updatedUser;
     } else {
