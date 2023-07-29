@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { getAuth } = require('firebase-admin/auth');
+import { getAuth } from 'firebase-admin/auth';
 
 const checkIsAdmin = async (currentUserId) => {
   const currentUserRecord = await getAuth().getUser(currentUserId);
@@ -8,4 +7,4 @@ const checkIsAdmin = async (currentUserId) => {
   return isAdmin;
 };
 
-module.exports = checkIsAdmin;
+export default checkIsAdmin;

@@ -1,17 +1,15 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const functions = require('firebase-functions');
-const { getAuth } = require('firebase-admin/auth');
-const { initializeApp } = require('firebase-admin/app');
-const admin = require('firebase-admin');
-const checkIsAdmin = require('./isAdmin.js');
+import { https } from 'firebase-functions';
+import { getAuth } from 'firebase-admin/auth';
+import { initializeApp } from 'firebase-admin/app';
+import checkIsAdmin from './isAdmin.js';
 initializeApp();
 
-exports.addAdminRole = functions.https.onCall(async (request, context) => {
+export const addAdminRole = https.onCall(async (request, context) => {
   try {
     const isAdmin = await checkIsAdmin(context.auth.uid);
 
     if (isAdmin) {
-      await admin.auth().setCustomUserClaims(request, {
+      await getAuth().setCustomUserClaims(request, {
         admin: true,
       });
     } else {
@@ -22,12 +20,12 @@ exports.addAdminRole = functions.https.onCall(async (request, context) => {
   }
 });
 
-exports.removeAdminRole = functions.https.onCall(async (request, context) => {
+export const removeAdminRole = https.onCall(async (request, context) => {
   try {
     const isAdmin = await checkIsAdmin(context.auth.uid);
 
     if (isAdmin) {
-      await admin.auth().setCustomUserClaims(request, {
+      await getAuth().setCustomUserClaims(request, {
         admin: false,
       });
     } else {
@@ -38,7 +36,7 @@ exports.removeAdminRole = functions.https.onCall(async (request, context) => {
   }
 });
 
-exports.createUser = functions.https.onCall(async (request, context) => {
+export const createUser = https.onCall(async (request, context) => {
   try {
     const isAdmin = await checkIsAdmin(context.auth.uid);
 
@@ -50,7 +48,7 @@ exports.createUser = functions.https.onCall(async (request, context) => {
         password: request.password,
       });
 
-      await admin.auth().setCustomUserClaims(createdUser.uid, {
+      await getAuth().setCustomUserClaims(createdUser.uid, {
         admin: !!request.isAdmin,
       });
 
@@ -63,7 +61,7 @@ exports.createUser = functions.https.onCall(async (request, context) => {
   }
 });
 
-exports.updateUser = functions.https.onCall(async (request, context) => {
+export const updateUser = https.onCall(async (request, context) => {
   try {
     const isAdmin = await checkIsAdmin(context.auth.uid);
 
@@ -74,7 +72,7 @@ exports.updateUser = functions.https.onCall(async (request, context) => {
         phoneNumber: request.tel,
       });
 
-      await admin.auth().setCustomUserClaims(createdUser.uid, {
+      await getAuth().setCustomUserClaims(updatedUser.uid, {
         admin: !!request.isAdmin,
       });
 
@@ -87,7 +85,7 @@ exports.updateUser = functions.https.onCall(async (request, context) => {
   }
 });
 
-exports.deleteUser = functions.https.onCall(async (request, context) => {
+export const deleteUser = https.onCall(async (request, context) => {
   try {
     const isAdmin = await checkIsAdmin(context.auth.uid);
 

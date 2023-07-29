@@ -53,7 +53,7 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
   }, [selectedRowId]);
 
   return (
-    <Box sx={{ m: 1, posittion: 'relative' }}>
+    <Box sx={{ m: 1, position: 'relative' }}>
       {success ? (
         <Fab color="success" sx={{ width: 40, height: 40 }}>
           <Check />
@@ -72,7 +72,7 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
         <CircularProgress
           size={45}
           color="primary"
-          sx={{ position: 'absolute', top: 2, left: 3, zIndex: 1 }}
+          sx={{ position: 'absolute', top: -2, left: -3, zIndex: 1 }}
         />
       )}
       <Fab
@@ -87,7 +87,7 @@ const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
         <CircularProgress
           size={45}
           color="primary"
-          sx={{ position: 'absolute', top: 2, left: 52, zIndex: 1 }}
+          sx={{ position: 'absolute', top: -2, left: 46, zIndex: 1 }}
         />
       )}
     </Box>
