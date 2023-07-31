@@ -38,7 +38,7 @@ export const guestsSlice = createSlice({
         if (payload) {
           state.guests = state.guests.map((guest) => {
             if (guest.id === payload.id) {
-              guest = payload;
+              return payload;
             }
             return guest;
           });
