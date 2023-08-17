@@ -1,19 +1,16 @@
-import AccommodationForm from '@/components/AccommodationForm/AccommodationForm.component';
+import AccommodationForm from '@/components/Accommodations/AccommodationForm/AccommodationForm.component';
 import { FormType, IAccommodation } from '@/redux/accomodations/interfaces';
 import { Status } from '@/redux/enums/status';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { addAccommodation } from '@/firebase/database/accommodation/addAccommodation';
 import {
   deleteAccommodationAction,
   updateAccommodation,
 } from '@/redux/accomodations/actions';
-import {
-  AccommodationFormProps,
-  ResetAccommodationForm,
-} from '@/redux/accomodations/interfaces';
+import { AccommodationFormProps } from '@/redux/accomodations/interfaces';
 import { useAppDispatch } from '@/redux/store';
 import { useState } from 'react';
+
 interface IProps {
   open: boolean;
   currentRow: IAccommodation | null;
@@ -23,19 +20,6 @@ interface IProps {
 const AccommodationEditModal = ({ open, currentRow, handleClose }: IProps) => {
   const [formSubmitStatus, setFormSubmitStatus] = useState<Status>(Status.IDLE);
   const dispatch = useAppDispatch();
-
-  const createAccommodation = async (
-    values: AccommodationFormProps,
-    resetForm: ResetAccommodationForm
-  ) => {
-    const result = await addAccommodation(values);
-    if (!result) {
-      setFormSubmitStatus(Status.FAILED);
-    } else {
-      setFormSubmitStatus(Status.SUCCEEDED);
-      resetForm();
-    }
-  };
 
   const editAccommodation = async (
     values: AccommodationFormProps,
@@ -78,15 +62,14 @@ const AccommodationEditModal = ({ open, currentRow, handleClose }: IProps) => {
         top="50%"
         left="50%"
         p={4}
-        width="320"
+        width="320px"
         borderRadius={2}
-        boxShadow="24"
+        boxShadow="10"
         bgcolor="background.paper"
       >
         <AccommodationForm
           formType={FormType.EDIT}
           formSubmitStatus={formSubmitStatus}
-          createAccommodation={createAccommodation}
           editAccommodation={editAccommodation}
           deleteAccommodation={deleteAccommodation}
           currentRow={currentRow}

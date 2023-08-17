@@ -1,5 +1,6 @@
 import { useIsAdmin } from '@/firebase/auth/useIsAdmin';
 import { IAccommodation } from '@/redux/accomodations/interfaces';
+import { Box } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import i18next from 'i18next';
 import { useState } from 'react';
@@ -23,7 +24,7 @@ const AccommodationsTable = ({ accommodations }: IProps) => {
     {
       field: 'name',
       headerName: i18next.t<string>('common.firstName'),
-      width: 100,
+      width: 200,
       editable: isAdmin,
     },
     {
@@ -41,16 +42,26 @@ const AccommodationsTable = ({ accommodations }: IProps) => {
 
   return (
     <>
-      <DataGrid
-        rows={accommodations}
-        columns={columns}
-        autoHeight
-        getRowId={(row) => row.id}
-        onRowClick={(row) => {
-          handleOpen();
-          setCurrentRow(row.row);
+      <Box
+        mx="auto"
+        width={{
+          sm: '100%',
+          md: '70%',
+          lg: '50%',
         }}
-      />
+      >
+        <DataGrid
+          rows={accommodations}
+          rowThreshold={25}
+          columns={columns}
+          getRowId={(row) => row.id}
+          onRowClick={(row) => {
+            handleOpen();
+            setCurrentRow(row.row);
+          }}
+        />
+      </Box>
+
       <AccommodationEditModal
         open={open}
         handleClose={handleClose}

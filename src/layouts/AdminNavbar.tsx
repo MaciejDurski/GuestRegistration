@@ -3,7 +3,6 @@ import {
   PANEL,
   USERS_TABLE,
   ACCOMMODATIONS,
-  ACCOMMODATION_FORM,
 } from '@/constants/routes';
 import { Tab, Tabs } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
@@ -53,13 +52,7 @@ const AdminNavbar = ({ isAdmin }: IProps) => {
           value={ACCOMMODATIONS}
           {...a11yProps(3)}
         />
-        <Tab
-          label={t('accommodationForm.accommodationForm')}
-          component={Link}
-          href={ACCOMMODATION_FORM}
-          value={ACCOMMODATION_FORM}
-          {...a11yProps(4)}
-        />
+
         {isAdmin && (
           <Tab
             label={t('userForm.userForm')}

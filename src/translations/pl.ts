@@ -96,8 +96,7 @@ export const translationsPL = {
     isAdminRequired: 'Podaj status organizatora',
   },
   accommodationForm: {
-    accommodationForm: 'Formularz Noclegu',
-    editAccommodationForm: 'Edycja Danych Noclegowni',
+    addAccommodation: 'Dodaj Nocleg',
+    editAccommodation: 'Edycja Danych Noclegowni',
   },
-  editAccommodationForm: {},
 };
