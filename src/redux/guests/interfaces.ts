@@ -44,3 +44,5 @@ interface GuestRegistrationResetFormProps
 export type ResetGuestForm = (
   nextState?: Partial<FormikState<GuestRegistrationResetFormProps>> | undefined
 ) => void;
+
+export type IFirebaseGuest = Omit<IGuest, 'id'>;
