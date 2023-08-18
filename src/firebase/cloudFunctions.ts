@@ -1,4 +1,4 @@
-import { IUser, UserRegistrationFormProps } from '@/redux/users/interfaces';
+import { IUser, UserFormProps } from '@/redux/users/interfaces';
 import { httpsCallable } from 'firebase/functions';
 import { functions } from './config';
 
@@ -12,7 +12,7 @@ export const removeAdminRole = async (userId: string) => {
   await removeAdminRole(userId);
 };
 
-export const createUser = async (user: UserRegistrationFormProps) => {
+export const createUser = async (user: UserFormProps) => {
   const createUser = httpsCallable(functions, 'createUser');
   const createdUser = await createUser(user);
   return createdUser;
