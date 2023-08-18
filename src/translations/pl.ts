@@ -26,7 +26,7 @@ export const translationsPL = {
     save: 'Zapisz',
     type: 'Typ',
     tel: 'Telefon',
-    userPanel: 'Panel Admina',
+    userPanel: 'Panel Organizatora',
     userForm: 'Rejestracja Organizatora',
     yes: 'Tak',
   },
@@ -42,6 +42,7 @@ export const translationsPL = {
   validation: {
     deleteGuest: 'Czy jesteś pewny, że chcesz usunąć tego gościa?',
     deleteUser: 'Czy jesteś pewny, że chcesz usunąć tego organizatora?',
+    deleteAccommodation: 'Czy jesteś pewny, że chcesz usunąć ten nocleg?',
   },
   formValidation: {
     addressTooShort: 'Adres musi się składać z ponad 2 liter',
@@ -89,7 +90,8 @@ export const translationsPL = {
     commentTooLong: 'Komentarz musi się składać z mniej niż 500 liter',
   },
   userForm: {
-    userForm: 'Formularz Organizatora',
+    addUser: 'Dodaj Organizatora',
+    editUser: 'Edytuj Dane Organizatora',
     isAdmin: 'Status Admina',
   },
   userFormValidation: {
@@ -97,6 +99,6 @@ export const translationsPL = {
   },
   accommodationForm: {
     addAccommodation: 'Dodaj Nocleg',
-    editAccommodation: 'Edycja Danych Noclegowni',
+    editAccommodation: 'Edytuj Dane Noclegu',
   },
 };

@@ -1,9 +1,4 @@
-import {
-  USER_FORM,
-  PANEL,
-  USERS_TABLE,
-  ACCOMMODATIONS,
-} from '@/constants/routes';
+import { ACCOMMODATIONS, PANEL, USERS } from '@/constants/routes';
 import { Tab, Tabs } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import { t } from 'i18next';
@@ -15,11 +10,7 @@ const a11yProps = (index: number) => ({
   'aria-controls': `nav-tabpanel-${index}`,
 });
 
-interface IProps {
-  isAdmin: boolean;
-}
-
-const AdminNavbar = ({ isAdmin }: IProps) => {
+const AdminNavbar = () => {
   const { asPath } = useRouter();
 
   return (
@@ -41,8 +32,8 @@ const AdminNavbar = ({ isAdmin }: IProps) => {
         <Tab
           label={t('common.organizers')}
           component={Link}
-          href={USERS_TABLE}
-          value={USERS_TABLE}
+          href={USERS}
+          value={USERS}
           {...a11yProps(1)}
         />
         <Tab
@@ -52,16 +43,6 @@ const AdminNavbar = ({ isAdmin }: IProps) => {
           value={ACCOMMODATIONS}
           {...a11yProps(3)}
         />
-
-        {isAdmin && (
-          <Tab
-            label={t('userForm.userForm')}
-            component={Link}
-            href={USER_FORM}
-            value={USER_FORM}
-            {...a11yProps(2)}
-          />
-        )}
       </Tabs>
     </Toolbar>
   );

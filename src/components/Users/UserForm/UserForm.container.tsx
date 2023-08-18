@@ -1,15 +1,15 @@
 import { addUserFB } from '@/firebase/database/user/addUser';
+import { FormType } from '@/redux/enums/formType';
 import { Status } from '@/redux/enums/status';
-import { ResetUserForm } from '@/redux/users/interfaces';
-import { UserRegistrationFormProps } from '@/redux/users/interfaces';
+import { ResetUserForm, UserFormProps } from '@/redux/users/interfaces';
 import { useState } from 'react';
-import UserRegistration from './UserRegistration.component';
+import UserRegistration from './UserForm.component';
 
 const UserRegistrationContainer = () => {
   const [formSubmitStatus, setFormSubmitStatus] = useState<Status>(Status.IDLE);
 
-  const onSubmit = async (
-    values: UserRegistrationFormProps,
+  const createUser = async (
+    values: UserFormProps,
     resetForm: ResetUserForm
   ) => {
     const result = await addUserFB(values);
@@ -22,12 +22,11 @@ const UserRegistrationContainer = () => {
   };
 
   return (
-    <>
-      <UserRegistration
-        onSubmit={onSubmit}
-        formSubmitStatus={formSubmitStatus}
-      />
-    </>
+    <UserRegistration
+      formType={FormType.CREATE}
+      createUser={createUser}
+      formSubmitStatus={formSubmitStatus}
+    />
   );
 };
 

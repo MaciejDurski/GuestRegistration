@@ -13,6 +13,8 @@ interface IProps {
   users: IUser[];
 }
 
+export const nullString = i18next.t<string>('common.none').toUpperCase();
+
 const GuestsTable = ({ guests, users }: IProps) => {
   const [selectedRowId, setSelectedRowId] = useState<GridRowId | null>(null);
 
@@ -92,13 +94,10 @@ const GuestsTable = ({ guests, users }: IProps) => {
         width: 100,
         valueGetter: ({ row }) =>
           !row.organizer
-            ? i18next.t<string>('common.none').toUpperCase()
-            : row.organizer,
+            ? nullString
+            : `${row.organizer.firstName} ${row.organizer.lastName}`,
         type: 'singleSelect',
-        valueOptions: [
-          i18next.t<string>('common.none').toUpperCase(),
-          ...organizersNames,
-        ],
+        valueOptions: [nullString, ...organizersNames],
         editable: true,
       },
       {
@@ -133,13 +132,8 @@ const GuestsTable = ({ guests, users }: IProps) => {
         width: 60,
         type: 'singleSelect',
         valueGetter: ({ row }) =>
-          !row.speechLength
-            ? i18next.t<string>('common.none').toUpperCase()
-            : row.speechLength,
-        valueOptions: [
-          i18next.t<string>('common.none').toUpperCase(),
-          ...speechLengthOptionsArray,
-        ],
+          !row.speechLength ? nullString : row.speechLength,
+        valueOptions: [nullString, ...speechLengthOptionsArray],
         editable: true,
       },
       {

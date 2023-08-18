@@ -1,12 +1,10 @@
 import { addAccommodation } from '@/firebase/database/accommodation/addAccommodation';
-
 import {
   AccommodationFormProps,
-  FormType,
   ResetAccommodationForm,
 } from '@/redux/accomodations/interfaces';
+import { FormType } from '@/redux/enums/formType';
 import { Status } from '@/redux/enums/status';
-
 import { useState } from 'react';
 import AccomodationForm from './AccommodationForm.component';
 

@@ -1,35 +1,29 @@
-import AccommodationForm from '@/components/Accommodations/AccommodationForm/AccommodationForm.component';
-import { IAccommodation } from '@/redux/accomodations/interfaces';
-import { Status } from '@/redux/enums/status';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import {
-  deleteAccommodationAction,
-  updateAccommodation,
-} from '@/redux/accomodations/actions';
-import { AccommodationFormProps } from '@/redux/accomodations/interfaces';
-import { useAppDispatch } from '@/redux/store';
-import { useState } from 'react';
-import { t } from 'i18next';
 import { FormType } from '@/redux/enums/formType';
+import { Status } from '@/redux/enums/status';
+import { useAppDispatch } from '@/redux/store';
+import { deleteUserAction, editUserAction } from '@/redux/users/actions';
+import { IUser, UserFormProps } from '@/redux/users/interfaces';
+import { Box, Modal } from '@mui/material';
+import { t } from 'i18next';
+import { useState } from 'react';
+import UserForm from '../UserForm/UserForm.component';
 
 interface IProps {
   open: boolean;
-  currentRow: IAccommodation | null;
+  currentRow: IUser | null;
   handleClose: () => void;
 }
 
-const AccommodationEditModal = ({ open, currentRow, handleClose }: IProps) => {
+const UserEditModal = ({ open, currentRow, handleClose }: IProps) => {
   const [formSubmitStatus, setFormSubmitStatus] = useState<Status>(Status.IDLE);
   const dispatch = useAppDispatch();
 
-  const editAccommodation = async (
-    values: AccommodationFormProps,
-    accommodationId: string | undefined
+  const editUser = async (
+    values: UserFormProps,
+    userId: string | undefined
   ) => {
     const result =
-      accommodationId &&
-      (await dispatch(updateAccommodation({ id: accommodationId, ...values })));
+      userId && (await dispatch(editUserAction({ id: userId, ...values })));
     if (!result) {
       setFormSubmitStatus(Status.FAILED);
     } else {
@@ -37,9 +31,9 @@ const AccommodationEditModal = ({ open, currentRow, handleClose }: IProps) => {
     }
   };
 
-  const deleteAccommodation = async (accommodationId: string) => {
-    if (window.confirm(t<string>('validation.deleteGuest'))) {
-      const result = await dispatch(deleteAccommodationAction(accommodationId));
+  const deleteUser = async (userId: string) => {
+    if (window.confirm(t<string>('validation.deleteUser'))) {
+      const result = await dispatch(deleteUserAction(userId));
       if (!result) {
         setFormSubmitStatus(Status.FAILED);
       } else {
@@ -71,11 +65,11 @@ const AccommodationEditModal = ({ open, currentRow, handleClose }: IProps) => {
         boxShadow="10"
         bgcolor="background.paper"
       >
-        <AccommodationForm
+        <UserForm
           formType={FormType.EDIT}
           formSubmitStatus={formSubmitStatus}
-          editAccommodation={editAccommodation}
-          deleteAccommodation={deleteAccommodation}
+          editUser={editUser}
+          deleteUser={deleteUser}
           currentRow={currentRow}
         />
       </Box>
@@ -83,4 +77,4 @@ const AccommodationEditModal = ({ open, currentRow, handleClose }: IProps) => {
   );
 };
 
-export default AccommodationEditModal;
+export default UserEditModal;

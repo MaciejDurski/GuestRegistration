@@ -1,9 +1,9 @@
 import {
   AccommodationFormProps,
-  FormType,
   IAccommodation,
   ResetAccommodationForm,
 } from '@/redux/accomodations/interfaces';
+import { FormType } from '@/redux/enums/formType';
 import { Status } from '@/redux/enums/status';
 import { Box, Button, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
@@ -14,7 +14,7 @@ import GMInput from '../../common/GMInput';
 import { accomodationFormSchema } from './AccomodationForm.schema';
 
 interface IProps {
-  formType: string;
+  formType: FormType;
   formSubmitStatus: Status;
   createAccommodation?: (
     values: AccommodationFormProps,
@@ -36,6 +36,9 @@ const AccommodationForm = ({
   deleteAccommodation,
   currentRow,
 }: IProps) => {
+  const createForm = formType === FormType.CREATE;
+  const editForm = formType === FormType.EDIT;
+
   return (
     <Formik
       initialValues={{
@@ -45,9 +48,9 @@ const AccommodationForm = ({
       }}
       validationSchema={accomodationFormSchema}
       onSubmit={(values, { resetForm }) => {
-        if (formType === FormType.CREATE) {
+        if (createForm) {
           createAccommodation && createAccommodation(values, resetForm);
-        } else if (formType === FormType.EDIT) {
+        } else if (editForm) {
           editAccommodation && editAccommodation(values, currentRow?.id);
         }
       }}
@@ -55,22 +58,23 @@ const AccommodationForm = ({
       {({ touched, errors }) => (
         <Form>
           <Stack
-            mt={{
-              xs: formType === FormType.CREATE ? 2 : 0,
-              sm: formType === FormType.CREATE ? 4 : 0,
-            }}
+            border={createForm ? 'solid 1px' : 'none'}
+            borderRadius={1}
+            borderColor="primary.main"
             mx="auto"
+            px={createForm ? 2 : 0}
+            pb={createForm ? 2 : 0}
+            mb={createForm ? 2 : 0}
             width={{
               xs: '100%',
-              sm: formType === FormType.CREATE ? '50%' : '100%',
+              sm: createForm ? '50%' : '100%',
             }}
           >
-            <Typography variant="h5" component="h1">
-              {formType === FormType.CREATE &&
-                t('accommodationForm.addAccommodation')}
-              {formType === FormType.EDIT &&
-                t('accommodationForm.editAccommodation')}
-            </Typography>
+            {editForm && (
+              <Typography variant="h5" component="h1">
+                {t('accommodationForm.editAccommodation')}
+              </Typography>
+            )}
             <Field
               name="name"
               label={t('common.accommodation')}
@@ -93,8 +97,8 @@ const AccommodationForm = ({
               error={errors.tel}
               touched={touched.tel}
             />
-            <Box ml="auto" mt={2} mb={3}>
-              {formType === FormType.EDIT && (
+            <Box ml="auto" mt={1}>
+              {editForm && (
                 <Button
                   onClick={() =>
                     currentRow &&
@@ -111,17 +115,17 @@ const AccommodationForm = ({
                 </Button>
               )}
               <Button variant="contained" type="submit" size="large">
-                {formType === FormType.CREATE && t('guestForm.submit')}
-                {formType === FormType.EDIT && t('common.save')}
+                {createForm && t('accommodationForm.addAccommodation')}
+                {editForm && t('common.save')}
               </Button>
             </Box>
-            {formType === FormType.CREATE && (
+            {createForm && (
               <FormStatusMessage
                 formSubmitStatus={formSubmitStatus}
                 message={t('formValidation.formSubmitMessageSuccess')}
               />
             )}
-            {formType === FormType.EDIT && (
+            {editForm && (
               <FormStatusMessage
                 formSubmitStatus={formSubmitStatus}
                 message={t('formValidation.formEditMessageSuccess')}

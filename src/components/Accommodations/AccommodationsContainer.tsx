@@ -1,7 +1,7 @@
 import AccommodationFormContainer from './AccommodationForm/AccommodationForm.container';
 import AccommodationsTableContainer from './AccommodationsTable/AccommodationsTable.container';
 
-const Accommodations = () => {
+const AccommodationsContainer = () => {
   return (
     <>
       <AccommodationFormContainer />
@@ -10,4 +10,4 @@ const Accommodations = () => {
   );
 };
 
-export default Accommodations;
+export default AccommodationsContainer;

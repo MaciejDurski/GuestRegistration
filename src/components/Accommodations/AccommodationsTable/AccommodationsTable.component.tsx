@@ -23,7 +23,7 @@ const AccommodationsTable = ({ accommodations }: IProps) => {
   const columns: GridColDef[] = [
     {
       field: 'name',
-      headerName: i18next.t<string>('common.firstName'),
+      headerName: i18next.t<string>('common.accommodation'),
       width: 200,
       editable: isAdmin,
     },
@@ -42,17 +42,9 @@ const AccommodationsTable = ({ accommodations }: IProps) => {
 
   return (
     <>
-      <Box
-        mx="auto"
-        width={{
-          sm: '100%',
-          md: '70%',
-          lg: '50%',
-        }}
-      >
+      <Box mx="auto" maxWidth="576px">
         <DataGrid
           rows={accommodations}
-          rowThreshold={25}
           columns={columns}
           getRowId={(row) => row.id}
           onRowClick={(row) => {
@@ -61,7 +53,6 @@ const AccommodationsTable = ({ accommodations }: IProps) => {
           }}
         />
       </Box>
-
       <AccommodationEditModal
         open={open}
         handleClose={handleClose}

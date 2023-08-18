@@ -27,15 +27,13 @@ const UsersActions = ({
   const handleUpdate = async () => {
     setIsLoading(true);
 
-    if (
-      users.filter((user) => params.row.organizer === user.id).length === 0 &&
-      params.row.organizer !== i18next.t<string>('common.none').toUpperCase()
-    ) {
-      const selectedOrganizer = users.filter(
-        (user) => `${user.firstName} ${user.lastName}` === params.row.organizer
-      );
-      params.row.organizer = selectedOrganizer[0].id;
-    }
+    console.log(1, params.row, users);
+    // if (params.row.organizer) {
+    //   const selectedOrganizer = users.filter(
+    //     (user) => `${user.firstName} ${user.lastName}` === params.row.organizer
+    //   );
+    // }
+
     const result = await dispatch(updateGuest(params.row));
 
     if (result) {
