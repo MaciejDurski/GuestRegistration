@@ -1,9 +1,9 @@
 import { createUser } from '@/firebase/cloudFunctions';
 import { db } from '@/firebase/config';
-import { UserRegistrationFormProps } from '@/redux/users/interfaces';
+import { UserFormProps } from '@/redux/users/interfaces';
 import { ref, set } from 'firebase/database';
 
-export const addUserFB = async (user: UserRegistrationFormProps) => {
+export const addUserFB = async (user: UserFormProps) => {
   try {
     const result = await createUser(user);
 
