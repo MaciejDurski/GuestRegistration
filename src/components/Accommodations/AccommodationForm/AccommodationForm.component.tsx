@@ -36,8 +36,8 @@ const AccommodationForm = ({
   deleteAccommodation,
   currentRow,
 }: IProps) => {
-  const createForm = formType === FormType.CREATE;
-  const editForm = formType === FormType.EDIT;
+  const isCreateForm = formType === FormType.CREATE;
+  const isEditForm = formType === FormType.EDIT;
 
   return (
     <Formik
@@ -48,9 +48,9 @@ const AccommodationForm = ({
       }}
       validationSchema={accomodationFormSchema}
       onSubmit={(values, { resetForm }) => {
-        if (createForm) {
+        if (isCreateForm) {
           createAccommodation && createAccommodation(values, resetForm);
-        } else if (editForm) {
+        } else if (isEditForm) {
           editAccommodation && editAccommodation(values, currentRow?.id);
         }
       }}
@@ -58,19 +58,19 @@ const AccommodationForm = ({
       {({ touched, errors }) => (
         <Form>
           <Stack
-            border={createForm ? 'solid 1px' : 'none'}
+            border={isCreateForm ? 'solid 1px' : 'none'}
             borderRadius={1}
             borderColor="primary.main"
             mx="auto"
-            px={createForm ? 2 : 0}
-            pb={createForm ? 2 : 0}
-            mb={createForm ? 2 : 0}
+            px={isCreateForm ? 2 : 0}
+            pb={isCreateForm ? 2 : 0}
+            mb={isCreateForm ? 2 : 0}
             width={{
               xs: '100%',
-              sm: createForm ? '50%' : '100%',
+              sm: isCreateForm ? '50%' : '100%',
             }}
           >
-            {editForm && (
+            {isEditForm && (
               <Typography variant="h5" component="h1">
                 {t('accommodationForm.editAccommodation')}
               </Typography>
@@ -98,7 +98,7 @@ const AccommodationForm = ({
               touched={touched.tel}
             />
             <Box ml="auto" mt={1}>
-              {editForm && (
+              {isEditForm && (
                 <Button
                   onClick={() =>
                     currentRow &&
@@ -115,17 +115,17 @@ const AccommodationForm = ({
                 </Button>
               )}
               <Button variant="contained" type="submit" size="large">
-                {createForm && t('accommodationForm.addAccommodation')}
-                {editForm && t('common.save')}
+                {isCreateForm && t('accommodationForm.addAccommodation')}
+                {isEditForm && t('common.save')}
               </Button>
             </Box>
-            {createForm && (
+            {isCreateForm && (
               <FormStatusMessage
                 formSubmitStatus={formSubmitStatus}
                 message={t('formValidation.formSubmitMessageSuccess')}
               />
             )}
-            {editForm && (
+            {isEditForm && (
               <FormStatusMessage
                 formSubmitStatus={formSubmitStatus}
                 message={t('formValidation.formEditMessageSuccess')}

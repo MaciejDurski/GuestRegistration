@@ -27,8 +27,8 @@ const UserForm = ({
   deleteUser,
   currentRow,
 }: IProps) => {
-  const createForm = formType === FormType.CREATE;
-  const editForm = formType === FormType.EDIT;
+  const isCreateForm = formType === FormType.CREATE;
+  const isEditForm = formType === FormType.EDIT;
 
   return (
     <Formik
@@ -42,9 +42,9 @@ const UserForm = ({
       }}
       validationSchema={userRegistrationSchema}
       onSubmit={(values, { resetForm }) => {
-        if (createForm) {
+        if (isCreateForm) {
           createUser && createUser(values, resetForm);
-        } else if (editForm) {
+        } else if (isEditForm) {
           editUser && editUser(values, currentRow?.id);
         }
       }}
@@ -53,15 +53,15 @@ const UserForm = ({
         <Form>
           <Stack
             mx="auto"
-            px={createForm ? 2 : 0}
-            pb={createForm ? 2 : 0}
-            mb={createForm ? 2 : 0}
+            px={isCreateForm ? 2 : 0}
+            pb={isCreateForm ? 2 : 0}
+            mb={isCreateForm ? 2 : 0}
             width={{
               xs: '100%',
-              sm: createForm ? '50%' : '100%',
+              sm: isCreateForm ? '50%' : '100%',
             }}
           >
-            {editForm && (
+            {isEditForm && (
               <Typography variant="h5" component="h1">
                 {t('userForm.editUser')}
               </Typography>
@@ -112,7 +112,7 @@ const UserForm = ({
                 Label={{ label: t('userForm.isAdmin') }}
               />
               <Box ml="auto" mb={5}>
-                {editForm && (
+                {isEditForm && (
                   <Button
                     onClick={() =>
                       currentRow && deleteUser && deleteUser(currentRow.id)
@@ -127,18 +127,18 @@ const UserForm = ({
                   </Button>
                 )}
                 <Button variant="contained" type="submit" size="large">
-                  {createForm && t('userForm.addUser')}
-                  {editForm && t('common.save')}
+                  {isCreateForm && t('userForm.addUser')}
+                  {isEditForm && t('common.save')}
                 </Button>
               </Box>
             </Stack>
-            {createForm && (
+            {isCreateForm && (
               <FormStatusMessage
                 formSubmitStatus={formSubmitStatus}
                 message={t('formValidation.formSubmitMessageSuccess')}
               />
             )}
-            {editForm && (
+            {isEditForm && (
               <FormStatusMessage
                 formSubmitStatus={formSubmitStatus}
                 message={t('formValidation.formEditMessageSuccess')}
