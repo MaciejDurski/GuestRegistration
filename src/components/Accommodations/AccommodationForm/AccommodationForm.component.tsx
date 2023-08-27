@@ -49,9 +49,9 @@ const AccommodationForm = ({
       validationSchema={accomodationFormSchema}
       onSubmit={(values, { resetForm }) => {
         if (isCreateForm) {
-          createAccommodation && createAccommodation(values, resetForm);
+          createAccommodation?.(values, resetForm);
         } else if (isEditForm) {
-          editAccommodation && editAccommodation(values, currentRow?.id);
+          editAccommodation?.(values, currentRow?.id);
         }
       }}
     >
@@ -101,9 +101,7 @@ const AccommodationForm = ({
               {isEditForm && (
                 <Button
                   onClick={() =>
-                    currentRow &&
-                    deleteAccommodation &&
-                    deleteAccommodation(currentRow.id)
+                    currentRow && deleteAccommodation?.(currentRow.id)
                   }
                   sx={{ mr: 1 }}
                   color="error"

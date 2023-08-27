@@ -32,9 +32,7 @@ const GuestsTable = ({ guests, users }: IProps) => {
         width: 100,
         type: 'actions',
         renderCell: (params) => (
-          <UsersActions
-            {...{ params, selectedRowId, setSelectedRowId, users }}
-          />
+          <UsersActions {...{ params, selectedRowId, setSelectedRowId }} />
         ),
       },
       {
@@ -94,8 +92,8 @@ const GuestsTable = ({ guests, users }: IProps) => {
         width: 100,
         valueGetter: ({ row }) =>
           !row.organizer
-            ? nullString
-            : `${row.organizer.firstName} ${row.organizer.lastName}`,
+            ? `${row.organizer.firstName} ${row.organizer.lastName}`
+            : nullString,
         type: 'singleSelect',
         valueOptions: [nullString, ...organizersNames],
         editable: true,
@@ -132,7 +130,7 @@ const GuestsTable = ({ guests, users }: IProps) => {
         width: 60,
         type: 'singleSelect',
         valueGetter: ({ row }) =>
-          !row.speechLength ? nullString : row.speechLength,
+          row.speechLength ? row.speechLength : nullString,
         valueOptions: [nullString, ...speechLengthOptionsArray],
         editable: true,
       },

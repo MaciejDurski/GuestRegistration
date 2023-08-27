@@ -5,16 +5,15 @@ import { deleteUserAction, editUserAction } from '@/redux/users/actions';
 import { IUser, UserFormProps } from '@/redux/users/interfaces';
 import { Box, Modal } from '@mui/material';
 import { t } from 'i18next';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import UserForm from '../UserForm/UserForm.component';
 
 interface IProps {
-  open: boolean;
   currentRow: IUser | null;
-  handleClose: () => void;
+  setCurrentRow: Dispatch<SetStateAction<IUser | null>>;
 }
 
-const UserEditModal = ({ open, currentRow, handleClose }: IProps) => {
+const UserEditModal = ({ currentRow, setCurrentRow }: IProps) => {
   const [formSubmitStatus, setFormSubmitStatus] = useState<Status>(Status.IDLE);
   const dispatch = useAppDispatch();
 
@@ -44,10 +43,10 @@ const UserEditModal = ({ open, currentRow, handleClose }: IProps) => {
 
   return (
     <Modal
-      open={open}
+      open={!!currentRow}
       onClose={() => {
         setFormSubmitStatus(Status.IDLE);
-        handleClose();
+        setCurrentRow(null);
       }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"

@@ -43,9 +43,9 @@ const UserForm = ({
       validationSchema={userRegistrationSchema}
       onSubmit={(values, { resetForm }) => {
         if (isCreateForm) {
-          createUser && createUser(values, resetForm);
+          createUser?.(values, resetForm);
         } else if (isEditForm) {
-          editUser && editUser(values, currentRow?.id);
+          editUser?.(values, currentRow?.id);
         }
       }}
     >

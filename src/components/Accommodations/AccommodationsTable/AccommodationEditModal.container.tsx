@@ -9,17 +9,16 @@ import {
 } from '@/redux/accomodations/actions';
 import { AccommodationFormProps } from '@/redux/accomodations/interfaces';
 import { useAppDispatch } from '@/redux/store';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { t } from 'i18next';
 import { FormType } from '@/redux/enums/formType';
 
 interface IProps {
-  open: boolean;
   currentRow: IAccommodation | null;
-  handleClose: () => void;
+  setCurrentRow: Dispatch<SetStateAction<IAccommodation | null>>;
 }
 
-const AccommodationEditModal = ({ open, currentRow, handleClose }: IProps) => {
+const AccommodationEditModal = ({ currentRow, setCurrentRow }: IProps) => {
   const [formSubmitStatus, setFormSubmitStatus] = useState<Status>(Status.IDLE);
   const dispatch = useAppDispatch();
 
@@ -50,10 +49,10 @@ const AccommodationEditModal = ({ open, currentRow, handleClose }: IProps) => {
 
   return (
     <Modal
-      open={open}
+      open={!!currentRow}
       onClose={() => {
         setFormSubmitStatus(Status.IDLE);
-        handleClose();
+        setCurrentRow(null);
       }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"

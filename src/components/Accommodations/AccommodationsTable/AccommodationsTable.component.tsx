@@ -13,12 +13,6 @@ interface IProps {
 const AccommodationsTable = ({ accommodations }: IProps) => {
   const { isAdmin } = useIsAdmin();
   const [currentRow, setCurrentRow] = useState<IAccommodation | null>(null);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setOpen(false);
-    setCurrentRow(null);
-  };
 
   const columns: GridColDef[] = [
     {
@@ -48,14 +42,12 @@ const AccommodationsTable = ({ accommodations }: IProps) => {
           columns={columns}
           getRowId={(row) => row.id}
           onRowClick={(row) => {
-            handleOpen();
             setCurrentRow(row.row);
           }}
         />
       </Box>
       <AccommodationEditModal
-        open={open}
-        handleClose={handleClose}
+        setCurrentRow={setCurrentRow}
         currentRow={currentRow}
       />
     </>

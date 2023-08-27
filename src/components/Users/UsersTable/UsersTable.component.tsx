@@ -12,12 +12,6 @@ interface IProps {
 const UsersTable = ({ users }: IProps) => {
   const { isAdmin } = useIsAdmin();
   const [currentRow, setCurrentRow] = useState<IUser | null>(null);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setOpen(false);
-    setCurrentRow(null);
-  };
 
   const columns: GridColDef[] = [
     {
@@ -59,15 +53,10 @@ const UsersTable = ({ users }: IProps) => {
         columns={columns}
         getRowId={(row) => row.id}
         onRowClick={(row) => {
-          handleOpen();
           setCurrentRow(row.row);
         }}
       />
-      <UserEditModal
-        open={open}
-        handleClose={handleClose}
-        currentRow={currentRow}
-      />
+      <UserEditModal currentRow={currentRow} setCurrentRow={setCurrentRow} />
     </>
   );
 };

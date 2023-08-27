@@ -1,6 +1,5 @@
 import { deleteGuest, updateGuest } from '@/redux/guests/actions';
 import { useAppDispatch } from '@/redux/store';
-import { IUser } from '@/redux/users/interfaces';
 import { Check, Delete, Save } from '@mui/icons-material';
 import { Box, CircularProgress, Fab } from '@mui/material';
 import { GridCellParams, GridRowId } from '@mui/x-data-grid';
@@ -11,28 +10,15 @@ interface IProps {
   params: GridCellParams;
   selectedRowId: GridRowId | null;
   setSelectedRowId: Dispatch<SetStateAction<GridRowId | null>>;
-  users: IUser[];
 }
 
-const UsersActions = ({
-  params,
-  selectedRowId,
-  setSelectedRowId,
-  users,
-}: IProps) => {
+const UsersActions = ({ params, selectedRowId, setSelectedRowId }: IProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleUpdate = async () => {
     setIsLoading(true);
-
-    console.log(1, params.row, users);
-    // if (params.row.organizer) {
-    //   const selectedOrganizer = users.filter(
-    //     (user) => `${user.firstName} ${user.lastName}` === params.row.organizer
-    //   );
-    // }
 
     const result = await dispatch(updateGuest(params.row));
 
