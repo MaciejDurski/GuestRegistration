@@ -1,4 +1,4 @@
-import { addUserFB } from '@/firebase/database/user/addUser';
+import { createUserFirebase } from '@/firebase/database/user/createUser';
 import { FormType } from '@/redux/enums/formType';
 import { Status } from '@/redux/enums/status';
 import { ResetUserForm, UserFormProps } from '@/redux/users/interfaces';
@@ -12,8 +12,14 @@ const UserRegistrationContainer = () => {
     values: UserFormProps,
     resetForm: ResetUserForm
   ) => {
-    const result = await addUserFB(values);
-    if (!result) {
+    const result = await createUserFirebase(values);
+    if (result === 'The user with the provided phone number already exists.') {
+      setFormSubmitStatus(Status.USED_TEL);
+    } else if (
+      result === 'The email address is already in use by another account.'
+    ) {
+      setFormSubmitStatus(Status.USED_EMAIL);
+    } else if (!result) {
       setFormSubmitStatus(Status.FAILED);
     } else {
       setFormSubmitStatus(Status.SUCCEEDED);

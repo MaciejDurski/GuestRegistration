@@ -21,6 +21,16 @@ const FormStatusMessage = ({ formSubmitStatus, message }: IProps) => {
           {t('formValidation.formSubmitMessageError')}
         </Typography>
       )}
+      {formSubmitStatus === Status.USED_TEL && (
+        <Typography variant="h5" mx="auto" color="error.main">
+          {t('formValidation.formMessageErrorUsedTel')}
+        </Typography>
+      )}
+      {formSubmitStatus === Status.USED_EMAIL && (
+        <Typography variant="h5" mx="auto" color="error.main">
+          {t('formValidation.formMessageErrorUsedEmail')}
+        </Typography>
+      )}
     </>
   );
 };
