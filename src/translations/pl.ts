@@ -64,10 +64,6 @@ export const translationsPL = {
     formSubmitMessageError: 'Coś poszło nie tak.',
     formSubmitMessageSuccess: 'Twój formularz został wysłany',
     formEditMessageSuccess: 'Dane pomyślnie edytowane',
-    formMessageErrorUsedTel:
-      'Organizator z podanym numerem telefonu już istnieje',
-    formMessageErrorUsedEmail:
-      'Organizator z podanym adresem email już istnieje',
   },
   guestForm: {
     guestForm: 'Formularz Gościa',

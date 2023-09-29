@@ -1,3 +1,4 @@
+import { absenceOption } from '@/constants/absenceOption';
 import { IGuest } from '@/redux/guests/interfaces';
 import { IUser } from '@/redux/users/interfaces';
 import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid';
@@ -12,8 +13,6 @@ interface IProps {
   guests: IGuest[];
   users: IUser[];
 }
-
-export const nullString = i18next.t<string>('common.none').toUpperCase();
 
 const GuestsTable = ({ guests, users }: IProps) => {
   const [selectedRowId, setSelectedRowId] = useState<GridRowId | null>(null);
@@ -93,9 +92,9 @@ const GuestsTable = ({ guests, users }: IProps) => {
         valueGetter: ({ row }) =>
           !row.organizer
             ? `${row.organizer.firstName} ${row.organizer.lastName}`
-            : nullString,
+            : absenceOption,
         type: 'singleSelect',
-        valueOptions: [nullString, ...organizersNames],
+        valueOptions: [absenceOption, ...organizersNames],
         editable: true,
       },
       {
@@ -130,8 +129,8 @@ const GuestsTable = ({ guests, users }: IProps) => {
         width: 60,
         type: 'singleSelect',
         valueGetter: ({ row }) =>
-          row.speechLength ? row.speechLength : nullString,
-        valueOptions: [nullString, ...speechLengthOptionsArray],
+          row.speechLength ? row.speechLength : absenceOption,
+        valueOptions: [absenceOption, ...speechLengthOptionsArray],
         editable: true,
       },
       {

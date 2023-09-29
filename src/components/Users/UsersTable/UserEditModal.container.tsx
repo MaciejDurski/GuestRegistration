@@ -4,7 +4,7 @@ import { useAppDispatch } from '@/redux/store';
 import { deleteUserAction, editUserAction } from '@/redux/users/actions';
 import { IUser, UserFormProps } from '@/redux/users/interfaces';
 import { Box, Modal } from '@mui/material';
-import { t } from 'i18next';
+import { DefaultTFuncReturn, t } from 'i18next';
 import { Dispatch, SetStateAction, useState } from 'react';
 import UserForm from '../UserForm/UserForm.component';
 
@@ -15,6 +15,9 @@ interface IProps {
 
 const UserEditModal = ({ currentRow, setCurrentRow }: IProps) => {
   const [formSubmitStatus, setFormSubmitStatus] = useState<Status>(Status.IDLE);
+  const [errorMessage, setErrorMessage] = useState<string | DefaultTFuncReturn>(
+    ''
+  );
   const dispatch = useAppDispatch();
 
   const editUser = async (
@@ -25,6 +28,7 @@ const UserEditModal = ({ currentRow, setCurrentRow }: IProps) => {
       userId && (await dispatch(editUserAction({ id: userId, ...values })));
     if (!result) {
       setFormSubmitStatus(Status.FAILED);
+      setErrorMessage('something went wrong');
     } else {
       setFormSubmitStatus(Status.SUCCEEDED);
     }
@@ -35,6 +39,7 @@ const UserEditModal = ({ currentRow, setCurrentRow }: IProps) => {
       const result = await dispatch(deleteUserAction(userId));
       if (!result) {
         setFormSubmitStatus(Status.FAILED);
+        setErrorMessage(t('formValidation.formSubmitMessageError'));
       } else {
         setFormSubmitStatus(Status.SUCCEEDED);
       }
@@ -58,7 +63,7 @@ const UserEditModal = ({ currentRow, setCurrentRow }: IProps) => {
         }}
         top="50%"
         left="50%"
-        p={4}
+        p={3}
         width="320px"
         borderRadius={2}
         boxShadow="10"
@@ -70,6 +75,7 @@ const UserEditModal = ({ currentRow, setCurrentRow }: IProps) => {
           editUser={editUser}
           deleteUser={deleteUser}
           currentRow={currentRow}
+          errorMessage={errorMessage}
         />
       </Box>
     </Modal>

@@ -64,7 +64,7 @@ const AccommodationEditModal = ({ currentRow, setCurrentRow }: IProps) => {
         }}
         top="50%"
         left="50%"
-        p={4}
+        p={3}
         width="320px"
         borderRadius={2}
         boxShadow="10"

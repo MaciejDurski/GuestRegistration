@@ -1,26 +1,23 @@
 import { createUser } from '@/firebase/cloudFunctions';
 import { db } from '@/firebase/config';
-import { UserFormProps } from '@/redux/users/interfaces';
+import {
+  ICloudFunctionResponse,
+  UserFormProps,
+} from '@/redux/users/interfaces';
 import { ref, set } from 'firebase/database';
 
 export const createUserFirebase = async (user: UserFormProps) => {
   try {
     const result = await createUser(user);
+    console.log(result);
 
-    const unknownData = result.data as {
-      uid?: string;
-      errorInfo?: { message: string };
-    };
+    const unknownData = result.data as ICloudFunctionResponse;
 
     if (unknownData.errorInfo) {
-      const errorMessage = unknownData.errorInfo.message;
-      return errorMessage;
+      return unknownData;
     }
 
-    let userId;
-    if (unknownData.uid) {
-      userId = unknownData.uid;
-    }
+    const userId = unknownData.uid;
 
     const reference = ref(db, `users/${userId}`);
 

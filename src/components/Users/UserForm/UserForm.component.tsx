@@ -5,7 +5,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import { Field, Form, Formik } from 'formik';
 import { CheckboxWithLabel } from 'formik-mui';
-import { t } from 'i18next';
+import { DefaultTFuncReturn, t } from 'i18next';
 import FormStatusMessage from '../../common/FormStatusMessage';
 import GMInput from '../../common/GMInput';
 import { userRegistrationSchema } from './userForm.schema';
@@ -17,6 +17,7 @@ interface IProps {
   editUser?: (values: UserFormProps, userId?: string) => void;
   deleteUser?: (userId: string) => void;
   currentRow?: IUser | null;
+  errorMessage: string | DefaultTFuncReturn;
 }
 
 const UserForm = ({
@@ -26,6 +27,7 @@ const UserForm = ({
   editUser,
   deleteUser,
   currentRow,
+  errorMessage,
 }: IProps) => {
   const isCreateForm = formType === FormType.CREATE;
   const isEditForm = formType === FormType.EDIT;
@@ -135,12 +137,14 @@ const UserForm = ({
             {isCreateForm && (
               <FormStatusMessage
                 formSubmitStatus={formSubmitStatus}
+                errorMessage={errorMessage}
                 message={t('formValidation.formSubmitMessageSuccess')}
               />
             )}
             {isEditForm && (
               <FormStatusMessage
                 formSubmitStatus={formSubmitStatus}
+                errorMessage={errorMessage}
                 message={t('formValidation.formEditMessageSuccess')}
               />
             )}

@@ -1,26 +1,32 @@
 import { createUserFirebase } from '@/firebase/database/user/createUser';
 import { FormType } from '@/redux/enums/formType';
 import { Status } from '@/redux/enums/status';
-import { ResetUserForm, UserFormProps } from '@/redux/users/interfaces';
+import {
+  ICloudFunctionResponse,
+  ResetUserForm,
+  UserFormProps,
+} from '@/redux/users/interfaces';
+import { DefaultTFuncReturn, t } from 'i18next';
 import { useState } from 'react';
-import UserRegistration from './UserForm.component';
+import UserForm from './UserForm.component';
 
 const UserRegistrationContainer = () => {
   const [formSubmitStatus, setFormSubmitStatus] = useState<Status>(Status.IDLE);
+  const [errorMessage, setErrorMessage] = useState<string | DefaultTFuncReturn>(
+    ''
+  );
 
   const createUser = async (
     values: UserFormProps,
     resetForm: ResetUserForm
   ) => {
-    const result = await createUserFirebase(values);
-    if (result === 'The user with the provided phone number already exists.') {
-      setFormSubmitStatus(Status.USED_TEL);
-    } else if (
-      result === 'The email address is already in use by another account.'
-    ) {
-      setFormSubmitStatus(Status.USED_EMAIL);
+    const result = (await createUserFirebase(values)) as ICloudFunctionResponse;
+    if (result.errorInfo) {
+      setFormSubmitStatus(Status.FAILED);
+      setErrorMessage(result.errorInfo.message);
     } else if (!result) {
       setFormSubmitStatus(Status.FAILED);
+      setErrorMessage(t('formValidation.formSubmitMessageError'));
     } else {
       setFormSubmitStatus(Status.SUCCEEDED);
       resetForm();
@@ -28,10 +34,11 @@ const UserRegistrationContainer = () => {
   };
 
   return (
-    <UserRegistration
+    <UserForm
       formType={FormType.CREATE}
       createUser={createUser}
       formSubmitStatus={formSubmitStatus}
+      errorMessage={errorMessage}
     />
   );
 };
