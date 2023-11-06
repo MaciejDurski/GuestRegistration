@@ -27,7 +27,7 @@ export type ResetUserForm = (
 
 export type IFirebaseUser = Omit<IUser, 'id'>;
 
-export interface ICreateUserResponse {
+export interface ICreateUserCloudFunctionResponse {
   data: {
     uid?: string;
     errorInfo?: {

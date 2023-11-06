@@ -2,7 +2,7 @@ import { createUserFirebase } from '@/firebase/database/user/createUser';
 import { FormType } from '@/redux/enums/formType';
 import { Status } from '@/redux/enums/status';
 import {
-  ICreateUserResponse,
+  ICreateUserCloudFunctionResponse,
   ResetUserForm,
   UserFormProps,
 } from '@/redux/users/interfaces';
@@ -20,13 +20,13 @@ const UserRegistrationContainer = () => {
     values: UserFormProps,
     resetForm: ResetUserForm
   ) => {
-    const cloudFunctionResponse = (await createUserFirebase(
+    const response = (await createUserFirebase(
       values
-    )) as ICreateUserResponse;
-    if (cloudFunctionResponse.data.errorInfo) {
+    )) as ICreateUserCloudFunctionResponse;
+    if (response.data.errorInfo) {
       setFormSubmitStatus(Status.FAILED);
-      setErrorMessage(cloudFunctionResponse.data.errorInfo.message);
-    } else if (!cloudFunctionResponse) {
+      setErrorMessage(response.data.errorInfo.message);
+    } else if (!response) {
       setFormSubmitStatus(Status.FAILED);
       setErrorMessage(t('formValidation.formSubmitMessageError'));
     } else {
