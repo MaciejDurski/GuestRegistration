@@ -90,7 +90,7 @@ const GuestsTable = ({ guests, users }: IProps) => {
         headerName: i18next.t<string>('common.guardian'),
         width: 100,
         valueGetter: ({ row }) =>
-          !row.organizer
+          row.organizer
             ? `${row.organizer.firstName} ${row.organizer.lastName}`
             : absenceOption,
         type: 'singleSelect',
