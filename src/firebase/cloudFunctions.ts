@@ -22,7 +22,7 @@ export const createUser = async (user: UserFormProps) => {
     ICreateUserCloudFunctionResponse
   >(functions, 'createUser');
   const result = await createUser(user);
-  console.log(result);
+
   return result;
 };
 

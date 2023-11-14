@@ -7,8 +7,6 @@ export const createUserFirebase = async (user: UserFormProps) => {
   try {
     const response = await createUser(user);
 
-    console.log(response);
-
     if (response.data.errorInfo) {
       return response;
     }
